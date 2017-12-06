@@ -1,8 +1,8 @@
 import { linterMap } from "./linter-map";
 
 export interface FormatInput {
-  filePath?: string,
-  text: string,
+  filePath?: string;
+  text: string;
 }
 
 export interface FormatOutput {}
