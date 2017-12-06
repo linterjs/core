@@ -1,12 +1,22 @@
-export interface FormatOutput {}
+export interface LinterAdapterFormatInput {
+  filePath?: string,
+  text: string,
+}
 
-export interface LintOutput {}
+export interface LinterAdapterFormatOutput {}
+
+export interface LinterAdapterLintInput {
+  filePath?: string,
+  text: string,
+}
+
+export interface LinterAdapterLintOutput {}
 
 // XXX: LinterAdapters decide if they do anything with text baed on filePath and text
 // Do we need to forward more info to LinterAdapters?
 export interface LinterAdapter {
-  format({ filePath, text }: { filePath: string; text: string }): FormatOutput,
-  lint({ filePath, text }: { filePath: string; text: string }): LintOutput,
+  format({ filePath, text }: LinterAdapterFormatInput): LinterAdapterFormatOutput,
+  lint({ filePath, text }: LinterAdapterLintInput): LinterAdapterLintOutput,
 }
 
 // TODO: Support config, configPath, modulePath, etc

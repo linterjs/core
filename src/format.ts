@@ -1,5 +1,13 @@
 import { linterMap } from "./linter-map";
 
-export function format({ filePath, text }: { filePath: string, text: string }) {
+export interface FormatInput {
+  filePath?: string,
+  text: string,
+}
+
+export interface FormatOutput {}
+
+export function format({ filePath, text }: FormatInput): FormatOutput {
   // TODO: Format all the things!
+  return {};
 }
