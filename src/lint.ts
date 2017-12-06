@@ -1,11 +1,11 @@
-import { LinterAdapter, LinterFactory, linterMap } from "./linter-map";
+import { LinterAdapter, LinterFactory, linterMap, LinterAdapterLintOutput } from "./linter-map";
 
 export interface LintInput {
   filePath?: string;
   text: string;
 }
 
-export interface LintOutput {}
+export type LintOutput = LinterAdapterLintOutput[];
 
 export function lint({ filePath, text }: LintInput): LintOutput {
   // Get a list of linters
@@ -22,5 +22,5 @@ export function lint({ filePath, text }: LintInput): LintOutput {
   // XXX: Could we return a streaming result for the cli if we lint in parallel?
   // This way the cli could add the linter results for each file as they become
   // available.
-  return {};
+  return linterOutputList;
 }
