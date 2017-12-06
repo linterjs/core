@@ -1,19 +1,30 @@
 {
-  "name": "@linter/core",
-  "version": "1.0.0-alpha.0",
-  "description": "Lint all the things... with one command",
-  "main": "dist/index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "author": "Simon Fridlund <simon@fridlund.email>",
+  "bugs": {
+    "url": "https://github.com/linterjs/core/issues"
   },
+  "dependencies": {
+    "tslib": "^1.8.0"
+  },
+  "description": "Lint all the things... with one command",
+  "devDependencies": {
+    "@types/node": "^8.0.55",
+    "typescript": "^2.6.2"
+  },
+  "homepage": "https://github.com/linterjs/core#readme",
+  "license": "UNLICENSED",
+  "main": "dist/index.js",
+  "name": "@linter/core",
+  "optionalDependencies": {},
+  "peerDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/linterjs/core.git"
   },
-  "author": "Simon Fridlund <simon@fridlund.email>",
-  "license": "UNLICENSED",
-  "bugs": {
-    "url": "https://github.com/linterjs/core/issues"
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "homepage": "https://github.com/linterjs/core#readme"
+  "types": "dist/index.d.ts",
+  "version": "1.0.0-alpha.0"
 }
