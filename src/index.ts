@@ -1,8 +1,11 @@
-export * from "./format";
-export * from "./lint";
+export { format, FormatInput, FormatOutput } from "./format";
+export { lint, LintInput, LintOutput } from "./lint";
 export {
   LinterAdapter,
   LinterFactory,
-  LintOutput,
-  registerLinter,
+  LinterAdapterFormatInput,
+  LinterAdapterFormatOutput,
+  LinterAdapterLintInput,
+  LinterAdapterLintOutput,
+  registerLinter
 } from "./linter-map";
