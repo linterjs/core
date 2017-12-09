@@ -12,7 +12,11 @@
     "lib": ["es2017"]
   },
   "exclude": [
-    "node_modules"
+    "**/__mock__",
+    "**/__snapshot__",
+    "**/__tests__",
+    "**/*.spec.*",
+    "**/*.test.*"
   ],
   "include": [
     "src/**/*"

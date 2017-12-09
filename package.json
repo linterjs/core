@@ -9,6 +9,10 @@
   "description": "Lint all the things... with one command",
   "devDependencies": {
     "@types/node": "^8.0.55",
+    "@types/jest": "^21.1.8",
+    "jest": "^21.2.1",
+    "jest-cli": "^21.2.1",
+    "ts-jest": "^21.2.4",
     "typescript": "^2.6.2"
   },
   "homepage": "https://github.com/linterjs/core#readme",
@@ -23,7 +27,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "types": "dist/index.d.ts",
   "version": "1.0.0-alpha.0"
