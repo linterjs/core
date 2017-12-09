@@ -25,6 +25,14 @@ export interface LinterAdapter {
 // TODO: Support config, configPath, modulePath, etc
 export type LinterFactory = () => LinterAdapter;
 
+export class DuplicateLinterError extends Error {
+  public message = `Linter "${this.linter}" is already registered.`;
+
+  public constructor(public linter: string) {
+    super();
+  }
+}
+
 export const linterMap = new Map<string, LinterFactory>();
 
 export function registerLinter(
@@ -32,7 +40,7 @@ export function registerLinter(
   linterFactory: LinterFactory
 ): void {
   if (linterMap.has(name)) {
-    throw new Error(`Linter with name: ${name} already registered.`);
+    throw new DuplicateLinterError(name);
   }
 
   linterMap.set(name, linterFactory);
