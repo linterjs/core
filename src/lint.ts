@@ -1,4 +1,4 @@
-import { LinterAdapter, LinterFactory, linterMap, LinterAdapterLintOutput } from "./linter-map";
+import { linterMap, LinterAdapterLintOutput } from "./linter-map";
 
 export interface LintInput {
   filePath?: string;
@@ -7,7 +7,15 @@ export interface LintInput {
 
 export type LintOutput = LinterAdapterLintOutput[];
 
+export class NoLintersError extends Error {
+  message = "No linters registered. Please install a linter adapter package.";
+}
+
 export function lint({ filePath, text }: LintInput): LintOutput {
+  if (linterMap.size === 0) {
+    throw new NoLintersError();
+  }
+
   // Get a list of linters
   const linters = Array.from(linterMap.values()).map(linterFactory =>
     linterFactory()
