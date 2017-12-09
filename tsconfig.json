@@ -1,7 +1,6 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "target": "es5",
     "module": "commonjs",
     "removeComments": true,
     "preserveConstEnums": true,
@@ -9,7 +8,7 @@
     "outDir": "dist",
     "downlevelIteration": true,
     "importHelpers": true,
-    "lib": ["es2017"]
+    "target": "es2017"
   },
   "exclude": [
     "**/__mock__",
