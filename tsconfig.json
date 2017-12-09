@@ -1,13 +1,14 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "module": "commonjs",
-    "removeComments": true,
-    "preserveConstEnums": true,
     "declaration": true,
-    "outDir": "dist",
     "downlevelIteration": true,
     "importHelpers": true,
+    "module": "commonjs",
+    "noUnusedLocals": true,
+    "outDir": "dist",
+    "preserveConstEnums": true,
+    "removeComments": true,
     "target": "es2017"
   },
   "exclude": [
@@ -17,7 +18,5 @@
     "**/*.spec.*",
     "**/*.test.*"
   ],
-  "include": [
-    "src/**/*"
-  ]
+  "include": ["./src"]
 }
