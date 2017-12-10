@@ -30,7 +30,8 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "jest"
+    "test": "jest",
+    "test:verbose": "jest --verbose"
   },
   "types": "dist/index.d.ts",
   "version": "1.0.0-alpha.0"
