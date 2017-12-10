@@ -1,4 +1,5 @@
-import { lint, NoLintersError } from "./lint";
+import { NoLintersError } from "./errors";
+import { lint } from "./lint";
 import { registerLinter } from "./linter-map";
 
 describe("Lint", () => {
@@ -18,7 +19,7 @@ describe("Lint", () => {
   test("Lint", () => {
     registerLinter("testLinter", linterFactory);
     const args = { text: 'const foo = "bar"' };
-    expect(lint(args)).toEqual([{}]);
+    expect(lint(args)).toBeInstanceOf(Array);
     expect(linterAdapter.lint).toHaveBeenCalledTimes(1);
     expect(linterAdapter.lint).toHaveBeenCalledWith(args);
   });
