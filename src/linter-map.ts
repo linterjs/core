@@ -5,7 +5,7 @@ export interface LinterAdapterFormatInput {
   text: string;
 }
 
-export interface LinterAdapterFormatOutput {}
+export type LinterAdapterFormatOutput = string;
 
 export interface LinterAdapterLintInput {
   filePath?: string;
