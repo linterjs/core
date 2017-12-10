@@ -1,10 +1,10 @@
 import { NoLintersError } from "./errors";
 import { lint } from "./lint";
-import { registerLinter } from "./linter-map";
+import { registerLinter, LinterAdapter } from "./linter-map";
 
 describe("Lint", () => {
-  const linterAdapter = {
-    format: jest.fn(() => ({})),
+  const linterAdapter: LinterAdapter = {
+    format: jest.fn(({ text }) => text),
     lint: jest.fn(() => ({}))
   };
 
