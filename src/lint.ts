@@ -1,3 +1,4 @@
+import { NoLintersError } from "./errors";
 import { linterMap, LinterAdapterLintOutput } from "./linter-map";
 
 export interface LintInput {
@@ -6,10 +7,6 @@ export interface LintInput {
 }
 
 export type LintOutput = LinterAdapterLintOutput[];
-
-export class NoLintersError extends Error {
-  message = "No linters registered. Please install a linter adapter package.";
-}
 
 export function lint({ filePath, text }: LintInput): LintOutput {
   if (linterMap.size === 0) {

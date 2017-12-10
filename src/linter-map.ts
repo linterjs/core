@@ -1,3 +1,5 @@
+import { DuplicateLinterError } from "./errors";
+
 export interface LinterAdapterFormatInput {
   filePath?: string;
   text: string;
@@ -24,14 +26,6 @@ export interface LinterAdapter {
 
 // TODO: Support config, configPath, modulePath, etc
 export type LinterFactory = () => LinterAdapter;
-
-export class DuplicateLinterError extends Error {
-  public message = `Linter "${this.linter}" is already registered.`;
-
-  public constructor(public linter: string) {
-    super();
-  }
-}
 
 export const linterMap = new Map<string, LinterFactory>();
 
