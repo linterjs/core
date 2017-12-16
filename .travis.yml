@@ -1,0 +1,21 @@
+os:
+  - linux
+  - osx
+
+language: node_js
+
+node_js:
+  - node
+  - 8
+
+cache:
+  directories:
+    - node_modules
+
+notifications:
+  webhooks:
+    urls:
+      - https://webhooks.gitter.im/e/94a8a87b117fbc50ceaf
+    on_success: change
+    on_failure: always
+    on_start: never
