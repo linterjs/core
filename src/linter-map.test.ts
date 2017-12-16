@@ -3,13 +3,15 @@ import {
   linterMap,
   registerLinter,
   LinterAdapter,
-  LinterFactory
+  LinterFactory,
+  LinterAdapterFormatSync,
+  LinterAdapterLintSync
 } from "./linter-map";
 
 describe("Linters", () => {
-  const linterFactory = jest.fn(() => ({
-    format: jest.fn(() => ({})),
-    lint: jest.fn(() => ({}))
+  const linterFactory: LinterFactory = jest.fn<LinterAdapter>(() => ({
+    formatSync: jest.fn<LinterAdapterFormatSync>(() => ({})),
+    lintSync: jest.fn<LinterAdapterLintSync>(() => ({}))
   }));
 
   test("Register linter", () => {

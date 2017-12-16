@@ -1,26 +1,32 @@
 import { NoLintersError } from "./errors";
 import { lint } from "./lint";
-import { registerLinter, LinterAdapter } from "./linter-map";
+import {
+  registerLinter,
+  LinterAdapter,
+  LinterAdapterFormatSync,
+  LinterAdapterLintSync
+} from "./linter-map";
 
 describe("Lint", () => {
   const linterAdapter: LinterAdapter = {
-    format: jest.fn(({ text }) => text),
-    lint: jest.fn(() => ({}))
+    formatSync: jest.fn<LinterAdapterFormatSync>(({ text }) => text),
+    lintSync: jest.fn<LinterAdapterLintSync>(() => ({}))
   };
 
   const linterFactory = jest.fn(() => linterAdapter);
 
   test("No registered linters", () => {
-    expect(() => {
-      lint({ text: 'const foo = "bar"' });
-    }).toThrowError(NoLintersError);
+    const promise = lint({ text: 'const foo = "bar"' });
+    expect(promise).rejects.toBeInstanceOf(NoLintersError);
   });
 
-  test("Lint", () => {
+  test("Lint", async () => {
     registerLinter("testLinter", linterFactory);
     const args = { text: 'const foo = "bar"' };
-    expect(lint(args)).toBeInstanceOf(Array);
-    expect(linterAdapter.lint).toHaveBeenCalledTimes(1);
-    expect(linterAdapter.lint).toHaveBeenCalledWith(args);
+    const result = await lint(args);
+    const isArray = Array.isArray(result);
+    expect(isArray).toBeTruthy();
+    expect(linterAdapter.lintSync).toHaveBeenCalledTimes(1);
+    expect(linterAdapter.lintSync).toHaveBeenCalledWith(args);
   });
 });

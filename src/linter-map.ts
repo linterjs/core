@@ -14,15 +14,44 @@ export interface LinterAdapterLintInput {
 
 export interface LinterAdapterLintOutput {}
 
-// XXX: LinterAdapters decide if they do anything with text baed on filePath and text
-// Do we need to forward more info to LinterAdapters?
-export interface LinterAdapter {
+export interface LinterAdapterFormatAsync {
   format({
     filePath,
     text
-  }: LinterAdapterFormatInput): LinterAdapterFormatOutput;
-  lint({ filePath, text }: LinterAdapterLintInput): LinterAdapterLintOutput;
+  }: LinterAdapterFormatInput): Promise<LinterAdapterFormatOutput>;
 }
+
+export interface LinterAdapterFormatSync {
+  formatSync({
+    filePath,
+    text
+  }: LinterAdapterFormatInput): LinterAdapterFormatOutput;
+}
+
+export type LinterAdapterFormat =
+  | LinterAdapterFormatAsync
+  | LinterAdapterFormatSync
+  | (LinterAdapterFormatAsync & LinterAdapterFormatSync);
+
+export interface LinterAdapterLintAsync {
+  lint({
+    filePath,
+    text
+  }: LinterAdapterLintInput): Promise<LinterAdapterLintOutput>;
+}
+
+export interface LinterAdapterLintSync {
+  lintSync({ filePath, text }: LinterAdapterLintInput): LinterAdapterLintOutput;
+}
+
+export type LinterAdapterLint =
+  | LinterAdapterLintAsync
+  | LinterAdapterLintSync
+  | (LinterAdapterLintAsync & LinterAdapterLintSync);
+
+// XXX: LinterAdapters decide if they do anything with text based on filePath and text
+// Do we need to forward more info to LinterAdapters?
+export type LinterAdapter = LinterAdapterFormat & LinterAdapterLint;
 
 // TODO: Support config, configPath, modulePath, etc
 export type LinterFactory = () => LinterAdapter;
