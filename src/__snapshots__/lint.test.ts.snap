@@ -2,6 +2,6 @@
 
 exports[`Lint Lint 1`] = `
 Array [
-  Object {},
+  Promise {},
 ]
 `;

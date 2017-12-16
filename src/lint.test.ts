@@ -12,8 +12,7 @@ describe("Lint", () => {
   const text = 'const foo = "bar"';
 
   test("No registered linters", () => {
-    const promise = lint({ text });
-    expect(promise).rejects.toBeInstanceOf(NoLintersError);
+    expect(() => lint({ text })).toThrowError(NoLintersError);
   });
 
   test("Lint", async () => {

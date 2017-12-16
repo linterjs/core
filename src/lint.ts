@@ -1,33 +1,14 @@
 import { NoLintersError } from "./errors";
-import {
-  linterMap,
-  LinterAdapterLintOutput,
-  LinterAdapter
-} from "./linter-map";
+import { linterMap, LinterAdapterLintOutput } from "./linter-map";
 
 export interface LintInput {
   filePath?: string;
-  returnArray: boolean;
   text: string;
 }
 
-export interface LintInputReturnArray extends LintInput {
-  returnArray: true;
-}
+export type LintOutput = Promise<LinterAdapterLintOutput>[];
 
-export interface LintInputReturnPromise extends LintInput {
-  returnArray: false;
-}
-
-export type LintOutputArray = LinterAdapterLintOutput[];
-
-export type LintOutputPromise = Promise<LinterAdapterLintOutput[]>;
-
-export type LintOutput = LintOutputArray | LintOutputPromise;
-
-export function lint(args: LintInputReturnArray): LintOutputArray;
-export function lint(args: LintInputReturnPromise): LintOutputPromise;
-export function lint({ filePath, text, returnArray = false }: LintInput): LintOutput {
+export function lint({ filePath, text }: LintInput): LintOutput {
   if (linterMap.size === 0) {
     throw new NoLintersError();
   }
@@ -44,5 +25,5 @@ export function lint({ filePath, text, returnArray = false }: LintInput): LintOu
   // XXX: Could we return a streaming result for the cli if we lint in parallel?
   // This way the cli could add the linter results for each file as they become
   // available.
-  return returnArray ? lintOutput : Promise.all(lintOutput);
+  return lintOutput;
 }
