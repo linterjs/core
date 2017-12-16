@@ -33,9 +33,12 @@
     "url": "git+https://github.com/linterjs/core.git"
   },
   "scripts": {
-    "clean": "rimraf covarage dist",
+    "clean": "rimraf coverage dist",
+    "clean:build": "rimraf coverage",
+    "clean:test": "rimraf dist",
     "build": "tsc",
-    "prebuild": "npm run clean",
+    "prebuild": "npm run clean:build",
+    "pretest": "npm run clean:test",
     "test": "jest",
     "test:verbose": "jest --verbose"
   },
