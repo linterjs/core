@@ -32,17 +32,14 @@ export function lint({ filePath, text, returnArray }: LintInput): LintOutput {
     throw new NoLintersError();
   }
 
-  const linters: (LinterAdapter | Promise<LinterAdapter>)[] = [];
-  for (const linterFactory of linterMap.values()) {
-    linters.push(linterFactory());
-  }
-
-  // Run text through all linters
-  // XXX: Linting should be able to be done in parallel
   const lintArgs = { filePath, text };
-  const lintOutput = linters.map(
-    async linter => await (await linter).lint(lintArgs)
-  );
+  const lintOutput: Promise<LinterAdapterLintOutput>[] = [];
+  // Run text through all linters
+  for (const linterFactory of linterMap.values()) {
+    lintOutput.push(
+      Promise.resolve(linterFactory()).then(({ lint }) => lint(lintArgs))
+    );
+  }
 
   // XXX: Could we return a streaming result for the cli if we lint in parallel?
   // This way the cli could add the linter results for each file as they become
