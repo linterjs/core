@@ -1,16 +1,16 @@
 import { NoLintersError } from "./errors";
 import { lint } from "./lint";
 import {
-  registerLinter,
   LinterAdapter,
-  LinterAdapterFormatSync,
-  LinterAdapterLintSync
+  LinterAdapterFormat,
+  LinterAdapterLint,
+  registerLinter
 } from "./linter-map";
 
 describe("Lint", () => {
   const linterAdapter: LinterAdapter = {
-    formatSync: jest.fn<LinterAdapterFormatSync>(({ text }) => text),
-    lintSync: jest.fn<LinterAdapterLintSync>(() => ({}))
+    format: jest.fn<LinterAdapterFormat>(({ text }) => text),
+    lint: jest.fn<LinterAdapterLint>(() => ({}))
   };
 
   const linterFactory = jest.fn(() => linterAdapter);
@@ -26,7 +26,7 @@ describe("Lint", () => {
     const result = await lint(args);
     const isArray = Array.isArray(result);
     expect(isArray).toBeTruthy();
-    expect(linterAdapter.lintSync).toHaveBeenCalledTimes(1);
-    expect(linterAdapter.lintSync).toHaveBeenCalledWith(args);
+    expect(linterAdapter.lint).toHaveBeenCalledTimes(1);
+    expect(linterAdapter.lint).toHaveBeenCalledWith(args);
   });
 });

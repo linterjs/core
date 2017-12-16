@@ -1,17 +1,17 @@
 import { DuplicateLinterError } from "./errors";
 import {
-  linterMap,
-  registerLinter,
   LinterAdapter,
+  LinterAdapterFormat,
+  LinterAdapterLint,
   LinterFactory,
-  LinterAdapterFormatSync,
-  LinterAdapterLintSync
+  linterMap,
+  registerLinter
 } from "./linter-map";
 
 describe("Linters", () => {
   const linterFactory: LinterFactory = jest.fn<LinterAdapter>(() => ({
-    formatSync: jest.fn<LinterAdapterFormatSync>(() => ({})),
-    lintSync: jest.fn<LinterAdapterLintSync>(() => ({}))
+    format: jest.fn<LinterAdapterFormat>(() => ({})),
+    lint: jest.fn<LinterAdapterLint>(() => ({}))
   }));
 
   test("Register linter", () => {

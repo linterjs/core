@@ -2,9 +2,7 @@ import { NoLintersError } from "./errors";
 import {
   linterMap,
   LinterAdapterLintOutput,
-  LinterAdapter,
-  LinterAdapterLintAsync,
-  LinterAdapterLintSync
+  LinterAdapter
 } from "./linter-map";
 
 export interface LintInput {
@@ -13,12 +11,6 @@ export interface LintInput {
 }
 
 export type LintOutput = LinterAdapterLintOutput[];
-
-function hasSyncLint(
-  linter: LinterAdapterLintAsync | LinterAdapterLintSync
-): linter is LinterAdapterLintSync {
-  return (<LinterAdapterLintSync>linter).lintSync !== undefined;
-}
 
 export async function lint({ filePath, text }: LintInput): Promise<LintOutput> {
   if (linterMap.size === 0) {
@@ -33,10 +25,7 @@ export async function lint({ filePath, text }: LintInput): Promise<LintOutput> {
   // Run text through all linters
   // XXX: Linting should be able to be done in parallel
   const lintArgs = { filePath, text };
-  const lintOutput = linters.map(
-    async linter =>
-      hasSyncLint(linter) ? linter.lintSync(lintArgs) : linter.lint(lintArgs)
-  );
+  const lintOutput = linters.map(async linter => await linter.lint(lintArgs));
 
   // XXX: Could we return a streaming result for the cli if we lint in parallel?
   // This way the cli could add the linter results for each file as they become

@@ -1,9 +1,4 @@
-import {
-  linterMap,
-  LinterAdapter,
-  LinterAdapterFormatAsync,
-  LinterAdapterFormatSync
-} from "./linter-map";
+import { linterMap, LinterAdapter } from "./linter-map";
 import { NoLintersError } from "./errors";
 
 export interface FormatInput {
@@ -12,12 +7,6 @@ export interface FormatInput {
 }
 
 export type FormatOutput = string;
-
-function hasSyncFormat(
-  linter: LinterAdapterFormatAsync | LinterAdapterFormatSync
-): linter is LinterAdapterFormatSync {
-  return (<LinterAdapterFormatSync>linter).formatSync !== undefined;
-}
 
 export async function format(input: FormatInput): Promise<FormatOutput> {
   if (linterMap.size === 0) {
@@ -38,9 +27,7 @@ export async function format(input: FormatInput): Promise<FormatOutput> {
       const { filePath, text } = await output;
       return {
         ...(filePath && { filePath }),
-        text: hasSyncFormat(linter)
-          ? linter.formatSync({ filePath, text })
-          : await linter.format({ filePath, text })
+        text: await linter.format({ filePath, text })
       };
     },
     Promise.resolve({ ...input })
