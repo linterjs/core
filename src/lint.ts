@@ -27,7 +27,7 @@ export type LintOutput = LintOutputArray | LintOutputPromise;
 
 export function lint(args: LintInputReturnArray): LintOutputArray;
 export function lint(args: LintInputReturnPromise): LintOutputPromise;
-export function lint({ filePath, text, returnArray }: LintInput): LintOutput {
+export function lint({ filePath, text, returnArray = false }: LintInput): LintOutput {
   if (linterMap.size === 0) {
     throw new NoLintersError();
   }
