@@ -1,5 +1,5 @@
-import { linterMap, LinterAdapter } from "./linter-map";
 import { NoLintersError } from "./errors";
+import { linterMap, LinterAdapter } from "./linter-map";
 
 export interface FormatInput {
   filePath?: string;
