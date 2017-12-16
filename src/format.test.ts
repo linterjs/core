@@ -24,7 +24,7 @@ describe("Format", () => {
     registerLinter("testLinter", linterFactory);
     const args = { text: 'const foo = "bar"' };
     const result = await format(args);
-    expect(result).toBe(args.text);
+    expect(result).toEqual(args.text);
     expect(linterAdapter.format).toHaveBeenCalledTimes(1);
     expect(linterAdapter.format).toHaveBeenCalledWith(args);
   });
