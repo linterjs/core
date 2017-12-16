@@ -13,15 +13,13 @@ describe("Lint", () => {
     lint: jest.fn<LinterAdapterLint>(() => ({}))
   };
 
-  const linterFactory = jest.fn(() => linterAdapter);
-
   test("No registered linters", () => {
     const promise = lint({ text: 'const foo = "bar"' });
     expect(promise).rejects.toBeInstanceOf(NoLintersError);
   });
 
   test("Lint", async () => {
-    registerLinter("testLinter", linterFactory);
+    registerLinter("testLinter", () => linterAdapter);
     const args = { text: 'const foo = "bar"' };
     const result = await lint(args);
     const isArray = Array.isArray(result);

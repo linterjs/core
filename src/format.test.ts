@@ -13,7 +13,6 @@ describe("Format", () => {
     lint: jest.fn<LinterAdapterLint>(() => ({}))
   };
 
-  const linterFactory = jest.fn(() => linterAdapter);
 
   test("No registered linters", async () => {
     const promise = format({ text: 'const foo = "bar"' });
@@ -21,7 +20,7 @@ describe("Format", () => {
   });
 
   test("Format", async () => {
-    registerLinter("testLinter", linterFactory);
+    registerLinter("testLinter", () => linterAdapter);
     const args = { text: 'const foo = "bar"' };
     const result = await format(args);
     expect(result).toEqual(args.text);
