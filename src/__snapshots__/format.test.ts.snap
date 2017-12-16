@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Format Format 1`] = `"const foo = \\"bar\\""`;
+
+exports[`Format Format with filePath 1`] = `"const foo = \\"bar\\""`;
+
+exports[`Format Format with prettier registered 1`] = `"prettier:const foo = \\"bar\\""`;
