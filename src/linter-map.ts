@@ -30,7 +30,7 @@ export interface LinterAdapter {
 }
 
 // TODO: Support config, configPath, modulePath, etc
-export type LinterFactory = () => LinterAdapter;
+export type LinterFactory = () => LinterAdapter | Promise<LinterAdapter>;
 
 export const linterMap = new Map<string, LinterFactory>();
 

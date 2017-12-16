@@ -19,7 +19,7 @@ export async function lint({ filePath, text }: LintInput): Promise<LintOutput> {
 
   const linters: LinterAdapter[] = [];
   for (const linterFactory of linterMap.values()) {
-    linters.push(linterFactory());
+    linters.push(await linterFactory());
   }
 
   // Run text through all linters

@@ -16,9 +16,9 @@ export async function format(input: FormatInput): Promise<FormatOutput> {
   const linters: [string, LinterAdapter][] = [];
   for (const [name, linterFactory] of linterMap) {
     if (name === "prettier") {
-      linters.unshift([name, linterFactory()]);
+      linters.unshift([name, await linterFactory()]);
     } else {
-      linters.push([name, linterFactory()]);
+      linters.push([name, await linterFactory()]);
     }
   }
 
