@@ -20,7 +20,10 @@ notifications:
     on_failure: always
     on_start: never
 
-after_success:
-  - npx codecov
-  - npx codeclimate-test-reporter < ./coverage/lcov.info
-  - npx coveralls < ./coverage/lcov.info
+jobs:
+  include:
+    - stage: coverage
+      node_js: node
+      script: npx codecov
+      script: npx codeclimate-test-reporter < ./coverage/lcov.info
+      script: npx coveralls < ./coverage/lcov.info
