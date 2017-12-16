@@ -22,3 +22,4 @@ notifications:
 
 after_success:
   - npx codecov
+  - npx codeclimate < ./coverage/lcov.info
