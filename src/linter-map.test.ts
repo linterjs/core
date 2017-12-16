@@ -1,5 +1,5 @@
+import { DuplicateLinterError } from "./errors";
 import {
-  DuplicateLinterError,
   linterMap,
   registerLinter,
   LinterAdapter,
