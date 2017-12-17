@@ -38,6 +38,7 @@
     "clean:test": "rimraf dist",
     "build": "tsc",
     "prebuild": "npm run clean:build",
+    "prepublishOnly": "npm run build",
     "pretest": "npm run clean:test",
     "test": "jest",
     "test:verbose": "jest --verbose"
