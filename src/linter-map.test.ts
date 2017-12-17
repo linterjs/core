@@ -2,11 +2,9 @@ import { DuplicateLinterError } from "./errors";
 import {
   LinterAdapter,
   LinterAdapterFormat,
-  LinterAdapterLint,
-  LinterFactory,
-  linterMap,
-  registerLinter
-} from "./linter-map";
+  LinterAdapterLint
+} from "./linter-adapter";
+import { LinterFactory, linterMap, registerLinter } from "./linter-map";
 
 describe("Linters", () => {
   const linterFactory: LinterFactory = jest.fn<LinterAdapter>(() => ({
