@@ -2,7 +2,7 @@ import {
   LinterAdapter,
   LinterAdapterFormat,
   LinterAdapterLint
-} from "../linter-map";
+} from "../linter-adapter";
 
 export const linterAdapter: LinterAdapter = {
   format: jest.fn<LinterAdapterFormat>(({ text }) => text),
