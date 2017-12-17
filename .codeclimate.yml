@@ -1,0 +1,8 @@
+exclude_patterns:
+  - '**/__mocks__'
+  - '**/__tests__'
+  - '**/*.spec.*'
+  - '**/*.test.*'
+  - '**/node_modules/'
+  - coverage/
+  - dist/
