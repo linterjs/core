@@ -23,4 +23,3 @@ notifications:
 after_success:
   - npx codecov
   - npx codeclimate-test-reporter < ./coverage/lcov.info
-  - npx coveralls < ./coverage/lcov.info
