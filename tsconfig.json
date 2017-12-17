@@ -18,5 +18,7 @@
     "**/*.spec.*",
     "**/*.test.*"
   ],
-  "include": ["./src"]
+  "include": [
+    "./src"
+  ]
 }
