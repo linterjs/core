@@ -1,12 +1,7 @@
 import { linterAdapter, prettierLinterAdapter } from "./__mocks__/adapters";
 import { NoLintersError } from "./errors";
 import { format } from "./format";
-import {
-  LinterAdapter,
-  LinterAdapterFormat,
-  LinterAdapterLint,
-  registerLinter
-} from "./linter-map";
+import { registerLinter } from "./linter-map";
 
 describe("Format", () => {
   const filePath = "test.js";

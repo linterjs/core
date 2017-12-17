@@ -1,12 +1,7 @@
 import { linterAdapter } from "./__mocks__/adapters";
 import { NoLintersError } from "./errors";
 import { lint } from "./lint";
-import {
-  LinterAdapter,
-  LinterAdapterFormat,
-  LinterAdapterLint,
-  registerLinter
-} from "./linter-map";
+import { registerLinter } from "./linter-map";
 
 describe("Lint", () => {
   const text = 'const foo = "bar"';
