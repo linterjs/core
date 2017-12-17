@@ -1,15 +1,22 @@
-import {
-  LinterAdapter,
-  LinterAdapterFormat,
-  LinterAdapterLint
-} from "../linter-adapter";
+import { Linter, LinterFormat, LinterLint } from "../linter";
+import { LinterProvider } from "../linter-map";
 
-export const linterAdapter: LinterAdapter = {
-  format: jest.fn<LinterAdapterFormat>(({ text }) => text),
-  lint: jest.fn<LinterAdapterLint>(() => ({}))
+export const testLinter: Linter = {
+  format: jest.fn<LinterFormat>(({ text }) => text),
+  lint: jest.fn<LinterLint>(() => ({}))
 };
 
-export const prettierLinterAdapter: LinterAdapter = {
-  format: jest.fn<LinterAdapterFormat>(({ text }) => `prettier:${text}`),
-  lint: jest.fn<LinterAdapterLint>(() => ({}))
+export const testLinterProvider: LinterProvider = {
+  linterFactory: () => testLinter,
+  name: "test"
+};
+
+export const prettierLinter: Linter = {
+  format: jest.fn<LinterFormat>(({ text }) => `prettier:${text}`),
+  lint: jest.fn<LinterLint>(() => ({}))
+};
+
+export const prettierLinterProvider: LinterProvider = {
+  linterFactory: () => prettierLinter,
+  name: "prettier"
 };

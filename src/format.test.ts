@@ -1,4 +1,8 @@
-import { linterAdapter, prettierLinterAdapter } from "./__mocks__/adapters";
+import {
+  testLinter,
+  testLinterProvider,
+  prettierLinterProvider
+} from "./__mocks__/adapters";
 import { NoLintersError } from "./errors";
 import { format } from "./format";
 import { registerLinter } from "./linter-map";
@@ -13,12 +17,12 @@ describe("Format", () => {
   });
 
   test("Format", async () => {
-    registerLinter("testLinter", () => linterAdapter);
+    registerLinter(testLinterProvider);
     const args = { text };
     const result = await format(args);
     expect(result).toMatchSnapshot();
-    expect(linterAdapter.format).toHaveBeenCalledTimes(1);
-    expect(linterAdapter.format).toHaveBeenCalledWith(args);
+    expect(testLinter.format).toHaveBeenCalledTimes(1);
+    expect(testLinter.format).toHaveBeenCalledWith(args);
   });
 
   test("Format with filePath", async () => {
@@ -28,7 +32,7 @@ describe("Format", () => {
   });
 
   test("Format with prettier registered", async () => {
-    registerLinter("prettier", () => prettierLinterAdapter);
+    registerLinter(prettierLinterProvider);
     const result = await format({ text });
     expect(result).toMatchSnapshot();
   });

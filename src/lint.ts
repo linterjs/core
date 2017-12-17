@@ -1,5 +1,5 @@
 import { NoLintersError } from "./errors";
-import { LinterAdapterLintOutput } from "./linter-adapter";
+import { LinterLintOutput } from "./linter";
 import { linterMap } from "./linter-map";
 
 export interface LintInput {
@@ -7,7 +7,7 @@ export interface LintInput {
   text: string;
 }
 
-export type LintOutput = Promise<LinterAdapterLintOutput>[];
+export type LintOutput = Promise<LinterLintOutput>[];
 
 export function lint({ filePath, text }: LintInput): LintOutput {
   if (linterMap.size === 0) {
@@ -15,9 +15,10 @@ export function lint({ filePath, text }: LintInput): LintOutput {
   }
 
   const lintArgs = { filePath, text };
-  const lintOutput: Promise<LinterAdapterLintOutput>[] = [];
+  const lintOutput: Promise<LinterLintOutput>[] = [];
   // Run text through all linters
   for (const linterFactory of linterMap.values()) {
+    // TODO: Handle error in linterFactory and lint?
     lintOutput.push(
       Promise.resolve(linterFactory()).then(({ lint }) => lint(lintArgs))
     );

@@ -1,5 +1,5 @@
 import { NoLintersError } from "./errors";
-import { LinterAdapter } from "./linter-adapter";
+import { Linter } from "./linter";
 import { linterMap } from "./linter-map";
 
 export interface FormatInput {
@@ -14,7 +14,7 @@ export async function format(input: FormatInput): Promise<FormatOutput> {
     throw new NoLintersError();
   }
 
-  const linters: [string, LinterAdapter][] = [];
+  const linters: [string, Linter][] = [];
   for (const [name, linterFactory] of linterMap) {
     if (name === "prettier") {
       linters.unshift([name, await linterFactory()]);
