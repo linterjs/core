@@ -1,24 +1,13 @@
-export interface LinterFormatInput {
-  filePath?: string;
-  text: string;
-}
-
-export type LinterFormatOutput = string;
-
-export interface LinterLintInput {
-  filePath?: string;
-  text: string;
-}
-
-export interface LinterLintOutput {}
+import { FormatInput, FormatOutput } from "./format";
+import { LintInput, LintOutput } from "./lint";
 
 export type LinterFormat = (
-  { filePath, text }: LinterFormatInput
-) => LinterFormatOutput | Promise<LinterFormatOutput>;
+  { filePath, text }: FormatInput
+) => FormatOutput | Promise<FormatOutput>;
 
 export type LinterLint = (
-  { filePath, text }: LinterLintInput
-) => LinterLintOutput | Promise<LinterLintOutput>;
+  { filePath, text }: LintInput
+) => LintOutput | Promise<LintOutput>;
 
 // XXX: LinterAdapters decide if they do anything with text based on filePath and text
 // Do we need to forward more info to LinterAdapters?

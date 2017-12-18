@@ -16,7 +16,20 @@ export function registerLinter({ linterFactory, name }: LinterProvider): void {
     throw new DuplicateLinterError(name);
   }
 
-  linterMap.set(name, linterFactory);
+  if (name === "prettier") {
+    const entries: [string, LinterFactory][] = [
+      [name, linterFactory],
+      ...linterMap.entries()
+    ];
+
+    linterMap.clear();
+
+    for (const [name, linterFactory] of entries) {
+      linterMap.set(name, linterFactory);
+    }
+  } else {
+    linterMap.set(name, linterFactory);
+  }
 }
 
 // XXX: Add more functionality, enable/disable linters?

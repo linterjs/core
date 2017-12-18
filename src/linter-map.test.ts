@@ -1,22 +1,46 @@
 import { DuplicateLinterError } from "./errors";
 import { Linter, LinterFormat, LinterLint } from "./linter";
-import { LinterFactory, linterMap, registerLinter } from "./linter-map";
-import { testLinterProvider } from "./__mocks__/adapters";
+import {
+  LinterFactory,
+  linterMap,
+  LinterProvider,
+  registerLinter
+} from "./linter-map";
 
 describe("Linters", () => {
+  const linter: Linter = {
+    format: jest.fn<LinterFormat>(({ filePath, text }) => ({
+      errorCount: 0,
+      ...(filePath && { filePath }),
+      messages: [],
+      output: text,
+      warningCount: 0
+    })),
+    lint: jest.fn<LinterLint>(() => ({
+      errorCount: 0,
+      messages: [],
+      warningCount: 0
+    }))
+  };
+
+  const linterProvider: LinterProvider = {
+    linterFactory: () => linter,
+    name: "test"
+  };
+
   const linterFactory: LinterFactory = jest.fn<Linter>(() => ({
     format: jest.fn<LinterFormat>(() => ({})),
     lint: jest.fn<LinterLint>(() => ({}))
   }));
 
   test("Register linter", () => {
-    registerLinter(testLinterProvider);
+    registerLinter(linterProvider);
     expect(linterMap.has("test")).toBeTruthy();
   });
 
   test("Register duplicate linters should fail", () => {
     expect(() => {
-      registerLinter(testLinterProvider);
+      registerLinter(linterProvider);
     }).toThrowError(DuplicateLinterError);
   });
 });

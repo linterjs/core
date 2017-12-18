@@ -1,4 +1,3 @@
-import { testLinterProvider, testLinter } from "./__mocks__/adapters";
 import { NoLintersError } from "./errors";
 import { lint } from "./lint";
 import { registerLinter } from "./linter-map";
@@ -11,11 +10,11 @@ describe("Lint", () => {
   });
 
   test("Lint", async () => {
-    registerLinter(testLinterProvider);
+    const { linter } = require("@linter/eslint");
     const args = { text };
     const result = await lint(args);
     expect(result).toMatchSnapshot();
-    expect(testLinter.lint).toHaveBeenCalledTimes(1);
-    expect(testLinter.lint).toHaveBeenCalledWith(args);
+    expect(linter.lint).toHaveBeenCalledTimes(1);
+    expect(linter.lint).toHaveBeenCalledWith(args);
   });
 });

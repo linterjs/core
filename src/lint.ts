@@ -1,5 +1,4 @@
 import { NoLintersError } from "./errors";
-import { LinterLintOutput } from "./linter";
 import { linterMap } from "./linter-map";
 
 export interface LintInput {
@@ -7,15 +6,36 @@ export interface LintInput {
   text: string;
 }
 
-export type LintOutput = Promise<LinterLintOutput>[];
+export const enum LintSeverity {
+  WARNING = 1,
+  ERROR = 2
+}
 
-export function lint({ filePath, text }: LintInput): LintOutput {
+export interface LintMessage {
+  column: number;
+  endColumn?: number;
+  endLine?: number;
+  line: number;
+  message: string;
+  ruleId: string;
+  ruleUri?: string;
+  severity: LintSeverity;
+}
+
+export interface LintOutput {
+  errorCount: number;
+  filePath?: string;
+  messages: LintMessage[];
+  warningCount: number;
+}
+
+export function lint({ filePath, text }: LintInput): Promise<LintOutput>[] {
   if (linterMap.size === 0) {
     throw new NoLintersError();
   }
 
   const lintArgs = { filePath, text };
-  const lintOutput: Promise<LinterLintOutput>[] = [];
+  const lintOutput: Promise<LintOutput>[] = [];
   // Run text through all linters
   for (const linterFactory of linterMap.values()) {
     // TODO: Handle error in linterFactory and lint?
