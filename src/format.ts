@@ -1,6 +1,5 @@
 import { NoLintersError } from "./errors";
 import { LintOutput } from "./lint";
-import { Linter } from "./linter";
 import { linterMap } from "./linter-map";
 
 export interface FormatInput {
