@@ -34,8 +34,8 @@
   },
   "scripts": {
     "clean": "rimraf coverage dist",
-    "clean:build": "rimraf coverage",
-    "clean:test": "rimraf dist",
+    "clean:build": "rimraf dist",
+    "clean:test": "rimraf coverage",
     "build": "tsc",
     "prebuild": "npm run clean:build",
     "prepublishOnly": "npm run build",
