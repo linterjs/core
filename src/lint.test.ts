@@ -9,7 +9,7 @@ describe("Lint", () => {
     expect(() => lint({ text })).toThrowError(NoLintersError);
   });
 
-  test("Lint", async () => {
+  test("text only", async () => {
     const { linter } = require("@linter/eslint");
     const args = { text };
     const result = await lint(args);

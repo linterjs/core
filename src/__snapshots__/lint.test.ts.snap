@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Lint Lint 1`] = `
+exports[`Lint text only 1`] = `
 Array [
   Promise {},
 ]

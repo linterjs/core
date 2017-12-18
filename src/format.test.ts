@@ -1,7 +1,6 @@
 import { NoLintersError } from "./errors";
 import { format } from "./format";
 import { registerLinter } from "./linter-map";
-import { LinterFormatInput } from "./linter";
 
 describe("Format", () => {
   const filePath = "test.js";
@@ -15,7 +14,7 @@ describe("Format", () => {
     }
   });
 
-  test("Format", async () => {
+  test("text only", async () => {
     const { linter } = require("@linter/eslint");
     const args = { text };
     const result = await format(args);
@@ -24,7 +23,7 @@ describe("Format", () => {
     expect(linter.format).toHaveBeenCalledWith(args);
   });
 
-  test("Format with filePath", async () => {
+  test("text and filePath", async () => {
     const { linter } = require("@linter/eslint");
     const args = { filePath, text };
     const result = await format(args);
@@ -33,18 +32,23 @@ describe("Format", () => {
     expect(linter.format).toHaveBeenCalledWith(args);
   });
 
-  test("Format with prettier registered", async () => {
-    const { linter } = require("@linter/prettier");
-    let args: LinterFormatInput = { text };
-    let result = await format(args);
-    expect(result).toMatchSnapshot();
-    expect(linter.format).toHaveBeenCalledTimes(1);
-    expect(linter.format).toHaveBeenCalledWith(args);
-    args = {
-      ...args,
-      filePath
-    };
-    result = await format(args);
-    expect(result).toMatchSnapshot();
+  describe("with Prettier registered", () => {
+    test("Text only", async () => {
+      const { linter } = require("@linter/prettier");
+      const args = { text };
+      const result = await format(args);
+      expect(result).toMatchSnapshot();
+      expect(linter.format).toHaveBeenCalledTimes(1);
+      expect(linter.format).toHaveBeenCalledWith(args);
+    });
+
+    test("text and filePath", async () => {
+      const { linter } = require("@linter/prettier");
+      const args = { text, filePath };
+      const result = await format(args);
+      expect(result).toMatchSnapshot();
+      expect(linter.format).toHaveBeenCalledTimes(2);
+      expect(linter.format).toHaveBeenCalledWith(args);
+    });
   });
 });

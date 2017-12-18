@@ -1,15 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Format Format 1`] = `
-Object {
-  "errorCount": 0,
-  "messages": Array [],
-  "output": "const foo = \\"bar\\"",
-  "warningCount": 0,
-}
-`;
-
-exports[`Format Format with filePath 1`] = `
+exports[`Format text and filePath 1`] = `
 Object {
   "errorCount": 0,
   "filePath": "test.js",
@@ -19,7 +10,16 @@ Object {
 }
 `;
 
-exports[`Format Format with prettier registered 1`] = `
+exports[`Format text only 1`] = `
+Object {
+  "errorCount": 0,
+  "messages": Array [],
+  "output": "const foo = \\"bar\\"",
+  "warningCount": 0,
+}
+`;
+
+exports[`Format with Prettier registered Text only 1`] = `
 Object {
   "errorCount": 0,
   "messages": Array [],
@@ -28,7 +28,7 @@ Object {
 }
 `;
 
-exports[`Format Format with prettier registered 2`] = `
+exports[`Format with Prettier registered text and filePath 1`] = `
 Object {
   "errorCount": 0,
   "filePath": "test.js",
