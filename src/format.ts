@@ -7,9 +7,9 @@ export interface FormatInput {
   text: string;
 }
 
-export type FormatOutput = LintOutput & {
+export interface FormatOutput extends LintOutput {
   output: string;
-};
+}
 
 export async function format({
   filePath: inputFilePath,
