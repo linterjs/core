@@ -16,7 +16,7 @@
     "jest": "^22.0.1",
     "jest-cli": "^22.0.1",
     "rimraf": "^2.6.2",
-    "ts-jest": "^21.2.4",
+    "ts-jest": "^22.0.0",
     "typescript": "^2.6.2"
   },
   "engines": {
