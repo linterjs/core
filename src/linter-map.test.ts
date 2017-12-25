@@ -4,7 +4,8 @@ import {
   LinterFactory,
   linterMap,
   LinterProvider,
-  registerLinter
+  registerLinter,
+  deregisterLinter
 } from "./linter-map";
 
 describe("Linters", () => {
@@ -42,5 +43,10 @@ describe("Linters", () => {
     expect(() => {
       registerLinter(linterProvider);
     }).toThrowError(DuplicateLinterError);
+  });
+
+  test("Deregister linter", () => {
+    deregisterLinter(linterProvider.name);
+    expect(linterMap.has("test")).toBeFalsy();
   });
 });
