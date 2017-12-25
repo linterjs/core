@@ -11,6 +11,10 @@ export interface LinterProvider {
   name: string;
 }
 
+export function deregisterLinter(name): void {
+  linterMap.delete(name);
+}
+
 export function registerLinter({ linterFactory, name }: LinterProvider): void {
   if (linterMap.has(name)) {
     throw new DuplicateLinterError(name);
