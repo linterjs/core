@@ -1,17 +1,21 @@
-import { FormatInput, FormatOutput } from "./format";
-import { LintInput, LintOutput } from "./lint";
+import { createFormat, FormatFunction } from "./format";
+import { createLint, LintFunction } from "./lint";
+import { LinterAdapter, loadedLinterAdapterPromises } from "./linter-adapter";
+import { loadLinterProvidersFromFile } from "./linter-providers";
 
-export type LinterFormat = (
-  { filePath, text }: FormatInput
-) => FormatOutput | Promise<FormatOutput>;
+// XXX: Create a new instance of Linter to load/reload registered
+// linter providers from file
+export default class Linter {
+  format: FormatFunction = createFormat(loadedLinterAdapterPromises.get(this));
+  lint: LintFunction = createLint(loadedLinterAdapterPromises.get(this));
 
-export type LinterLint = (
-  { filePath, text }: LintInput
-) => LintOutput | Promise<LintOutput>;
-
-// XXX: LinterAdapters decide if they do anything with text based on filePath and text
-// Do we need to forward more info to LinterAdapters?
-export interface Linter {
-  format: LinterFormat;
-  lint: LinterLint;
+  // TODO: Support config/options
+  constructor() {
+    const linterProviders = loadLinterProvidersFromFile();
+    const linterAdapters = new Set<Promise<LinterAdapter>>();
+    for (const { linterFactory } of linterProviders.values()) {
+      linterAdapters.add(Promise.resolve(linterFactory()));
+    }
+    loadedLinterAdapterPromises.set(this, linterAdapters);
+  }
 }

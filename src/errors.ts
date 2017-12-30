@@ -1,11 +1,8 @@
-export class DuplicateLinterError extends Error {
-  public message = `Linter "${this.linter}" is already registered.`;
-
-  public constructor(public linter: string) {
-    super();
-  }
-}
+import { oneLine } from "common-tags";
 
 export class NoLintersError extends Error {
-  message = "No linters registered. Please install a linter adapter package.";
+  message = oneLine`
+    No linters registered.
+    Please install at least one linter provider package.
+    `;
 }

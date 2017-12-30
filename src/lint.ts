@@ -1,5 +1,5 @@
 import { NoLintersError } from "./errors";
-import { linterMap } from "./linter-map";
+import { LinterAdapter } from "./linter-adapter";
 
 export interface LintInput {
   filePath?: string;
@@ -29,23 +29,31 @@ export interface LintOutput {
   warningCount: number;
 }
 
-export function lint({ filePath, text }: LintInput): Promise<LintOutput>[] {
-  if (linterMap.size === 0) {
-    throw new NoLintersError();
-  }
+export type LintFunction = (
+  { filePath, text }: LintInput
+) => Promise<LintOutput>[];
 
-  const lintArgs = { filePath, text };
-  const lintOutput: Promise<LintOutput>[] = [];
-  // Run text through all linters
-  for (const linterFactory of linterMap.values()) {
-    // TODO: Handle error in linterFactory and lint?
-    lintOutput.push(
-      Promise.resolve(linterFactory()).then(({ lint }) => lint(lintArgs))
-    );
-  }
+export function createLint(
+  linterAdapterPromises: Set<Promise<LinterAdapter>>
+): LintFunction {
+  return function lint({ filePath, text }: LintInput): Promise<LintOutput>[] {
+    if (linterAdapterPromises.size === 0) {
+      throw new NoLintersError();
+    }
 
-  // XXX: Could we return a streaming result for the cli if we lint in parallel?
-  // This way the cli could add the linter results for each file as they become
-  // available.
-  return lintOutput;
+    const lintArgs = { filePath, text };
+    const lintOutput: Promise<LintOutput>[] = [];
+    // Run text through all linters
+    for (const linterAdapterPromise of linterAdapterPromises.values()) {
+      // TODO: Handle error in linterFactory and lint?
+      lintOutput.push(
+        Promise.resolve(linterAdapterPromise).then(({ lint }) => lint(lintArgs))
+      );
+    }
+
+    // XXX: Could we return a streaming result for the cli if we lint in parallel?
+    // This way the cli could add the linter results for each file as they become
+    // available.
+    return lintOutput;
+  };
 }

@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Lint text only 1`] = `
+exports[`Lint with @linter/eslint text only 1`] = `
 Array [
   Promise {},
 ]
 `;
+
+exports[`Lint with no registered linters 1`] = `"No linters registered. Please install at least one linter provider package."`;

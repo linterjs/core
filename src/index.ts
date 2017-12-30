@@ -1,10 +1,23 @@
-export { DuplicateLinterError, NoLintersError } from "./errors";
-export { format, FormatInput, FormatOutput } from "./format";
-export { lint, LintInput, LintMessage, LintOutput, LintSeverity } from "./lint";
-export { Linter, LinterFormat, LinterLint } from "./linter";
+import Linter from "./linter";
+
+export { NoLintersError } from "./errors";
+export { FormatFunction, FormatInput, FormatOutput } from "./format";
 export {
-  deregisterLinter,
-  LinterFactory,
+  LintFunction,
+  LintInput,
+  LintMessage,
+  LintOutput,
+  LintSeverity
+} from "./lint";
+export {
+  LinterAdapter,
+  LinterAdapterFormat,
+  LinterAdapterLint,
+  LinterFactory
+} from "./linter-adapter";
+export {
+  deregisterLinterProvider,
   LinterProvider,
-  registerLinter
-} from "./linter-map";
+  registerLinterProvider
+} from "./linter-providers";
+export default Linter;

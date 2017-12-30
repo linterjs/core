@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Create Linter without registered linter providers 1`] = `"No linters registered. Please install at least one linter provider package."`;

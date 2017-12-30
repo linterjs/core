@@ -1,6 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Format text and filePath 1`] = `
+exports[`Format with @linter/eslint and @linter/prettier Text only 1`] = `
+Object {
+  "errorCount": 0,
+  "messages": Array [],
+  "output": "prettier:const foo = \\"bar\\"",
+  "warningCount": 0,
+}
+`;
+
+exports[`Format with @linter/eslint and @linter/prettier text and filePath 1`] = `
+Object {
+  "errorCount": 0,
+  "filePath": "test.js",
+  "messages": Array [],
+  "output": "prettier:const foo = \\"bar\\"",
+  "warningCount": 0,
+}
+`;
+
+exports[`Format with @linter/eslint text and filePath 1`] = `
 Object {
   "errorCount": 0,
   "filePath": "test.js",
@@ -10,7 +29,7 @@ Object {
 }
 `;
 
-exports[`Format text only 1`] = `
+exports[`Format with @linter/eslint text only 1`] = `
 Object {
   "errorCount": 0,
   "messages": Array [],
@@ -19,21 +38,4 @@ Object {
 }
 `;
 
-exports[`Format with Prettier registered Text only 1`] = `
-Object {
-  "errorCount": 0,
-  "messages": Array [],
-  "output": "prettier:const foo = \\"bar\\"",
-  "warningCount": 0,
-}
-`;
-
-exports[`Format with Prettier registered text and filePath 1`] = `
-Object {
-  "errorCount": 0,
-  "filePath": "test.js",
-  "messages": Array [],
-  "output": "prettier:const foo = \\"bar\\"",
-  "warningCount": 0,
-}
-`;
+exports[`Format with no registered linters 1`] = `[Error: No linters registered. Please install at least one linter provider package.]`;
