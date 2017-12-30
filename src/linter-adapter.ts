@@ -1,6 +1,6 @@
 import { FormatInput, FormatOutput } from "./format";
 import { LintInput, LintOutput } from "./lint";
-import { Linter } from "./linter";
+import Linter from "./linter";
 
 export type LinterAdapterFormat = (
   { filePath, text }: FormatInput
