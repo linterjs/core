@@ -1,5 +1,5 @@
 import { __clearFiles, __setFiles } from "fs";
-import { Linter } from "./linter";
+import Linter from "./linter";
 import {
   registerLinterProvider,
   registeredLinterProvidersFilePath
