@@ -21,7 +21,7 @@ const mockFs = {
       return files[path];
     }
 
-    fs.readFileSync(path, options);
+    return fs.readFileSync(path, options);
   }),
   writeFileSync: jest.fn((path, data, options) => {
     if (path in files) {
