@@ -8,4 +8,4 @@
 [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.svg)](https://gitter.im/linterjs/general)
 
 This is the core component of `@linter`. This is used by the cli,
-editor integrations and linter adapters.
+editor integrations and linter providers.
