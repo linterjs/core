@@ -3,7 +3,7 @@ import {
   LinterAdapterFormat,
   LinterAdapterLint
 } from "../../src/linter-adapter";
-import { LinterProvider } from "../../src/linter-providers";
+import { LinterProvider } from "../../src/linter-provider";
 
 export const linter: LinterAdapter = {
   format: jest.fn<LinterAdapterFormat>(({ filePath, text }) => ({
@@ -20,7 +20,9 @@ export const linter: LinterAdapter = {
   }))
 };
 
-export const linterProvider: LinterProvider = {
+const linterProvider: LinterProvider = {
   linterFactory: () => linter,
   name: "eslint"
 };
+
+export default linterProvider;
