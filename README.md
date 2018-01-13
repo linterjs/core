@@ -9,6 +9,3 @@
 
 This is the core component of `@linter`. This is used by the cli,
 editor integrations and linter adapters.
-
-Tihs package shouldn't be used directly by developers wanting to use @linter to
-lint their projects. Please use @linter/cli or the integration for your editor.
