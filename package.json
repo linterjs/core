@@ -4,23 +4,23 @@
     "url": "https://github.com/linterjs/core/issues"
   },
   "dependencies": {
-    "common-tags": "^1.6.0",
+    "common-tags": "^1.7.2",
     "loglevel-colored-level-prefix": "^1.0.0",
     "tslib": "^1.8.1"
   },
   "description": "Lint all the things... with one command",
   "devDependencies": {
-    "@types/jest": "^22.0.0",
-    "@types/node": "^8.5.2",
     "@babel/core": "^7.0.0-beta.37",
     "@babel/preset-env": "^7.0.0-beta.37",
+    "@types/jest": "^22.0.1",
+    "@types/node": "^9.3.0",
     "babel-core": "^7.0.0-bridge.0",
     "codeclimate-test-reporter": "^0.5.0",
     "codecov": "^3.0.0",
-    "jest": "^22.0.4",
-    "jest-cli": "^22.0.4",
+    "jest": "^22.0.6",
+    "jest-cli": "^22.0.6",
     "rimraf": "^2.6.2",
-    "ts-jest": "^22.0.0",
+    "ts-jest": "^22.0.1",
     "typescript": "^2.6.2"
   },
   "engines": {
