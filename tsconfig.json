@@ -6,9 +6,11 @@
     "importHelpers": true,
     "module": "commonjs",
     "noUnusedLocals": true,
+    "noUnusedParameters": true,
     "outDir": "dist",
     "preserveConstEnums": true,
     "removeComments": true,
+    "strictNullChecks": true,
     "target": "es2017"
   },
   "exclude": [
