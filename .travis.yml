@@ -17,4 +17,3 @@ notifications:
     on_start: never
 os:
   - linux
-  - osx
