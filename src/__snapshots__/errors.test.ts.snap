@@ -1,3 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Errors NoLintersError 1`] = `[Error: No linters registered. Please install at least one linter provider package.]`;
+exports[`Errors LinterProviderLoadError 1`] = `[Error: There was a problem importing the linter provider module:  "@linter/provider-eslint".]`;
+
+exports[`Errors ModuleNotLinterProviderError 1`] = `[Error: The imported module is not a linter provider:  "@linter/provider-eslint"]`;
+
+exports[`Errors NoLinterProvidersError 1`] = `[Error: No linter providers found. Please install at least one linter provider package.]`;

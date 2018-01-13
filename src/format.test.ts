@@ -1,7 +1,7 @@
 import { createFormat } from "./format";
 
-jest.mock("@linter/eslint");
-jest.mock("@linter/prettier");
+jest.mock("@linter/provider-eslint");
+jest.mock("@linter/provider-prettier");
 
 describe("Format", () => {
   const filePath = "test.js";
@@ -9,7 +9,7 @@ describe("Format", () => {
   let linterAdapterPromiseList;
   const text = 'const foo = "bar"';
 
-  test("with no registered linters", async () => {
+  test("with no installed linter providers", async () => {
     try {
       format = createFormat(new Set());
       await format({ text });
@@ -18,15 +18,15 @@ describe("Format", () => {
     }
   });
 
-  describe("with @linter/eslint", () => {
+  describe("with @linter/provider-eslint", () => {
     beforeAll(() => {
-      const { linterProvider: { linterFactory } } = require("@linter/eslint");
+      const { linterFactory } = require("@linter/provider-eslint").default;
       linterAdapterPromiseList = [Promise.resolve(linterFactory())];
       format = createFormat(new Set(linterAdapterPromiseList));
     });
 
     test("text only", async () => {
-      const { linter } = require("@linter/eslint");
+      const { linter } = require("@linter/provider-eslint");
       const args = { text };
       const result = await format(args);
       expect(result).toMatchSnapshot();
@@ -35,7 +35,7 @@ describe("Format", () => {
     });
 
     test("text and filePath", async () => {
-      const { linter } = require("@linter/eslint");
+      const { linter } = require("@linter/provider-eslint");
       const args = { filePath, text };
       const result = await format(args);
       expect(result).toMatchSnapshot();
@@ -45,9 +45,7 @@ describe("Format", () => {
 
     describe("and @linter/prettier", () => {
       beforeAll(() => {
-        const {
-          linterProvider: { linterFactory }
-        } = require("@linter/prettier");
+        const { linterFactory } = require("@linter/provider-prettier").default;
         linterAdapterPromiseList = [
           Promise.resolve(linterFactory()),
           ...linterAdapterPromiseList
@@ -56,7 +54,7 @@ describe("Format", () => {
       });
 
       test("Text only", async () => {
-        const { linter } = require("@linter/prettier");
+        const { linter } = require("@linter/provider-prettier");
         const args = { text };
         const result = await format(args);
         expect(result).toMatchSnapshot();
@@ -65,7 +63,7 @@ describe("Format", () => {
       });
 
       test("text and filePath", async () => {
-        const { linter } = require("@linter/prettier");
+        const { linter } = require("@linter/provider-prettier");
         const args = { text, filePath };
         const result = await format(args);
         expect(result).toMatchSnapshot();

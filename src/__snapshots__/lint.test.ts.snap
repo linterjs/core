@@ -1,9 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Lint with @linter/eslint text only 1`] = `
+exports[`Lint with @linter/provider-eslint text and filePath 1`] = `
 Array [
-  Promise {},
+  Object {
+    "errorCount": 0,
+    "messages": Array [],
+    "warningCount": 0,
+  },
 ]
 `;
 
-exports[`Lint with no registered linters 1`] = `"No linters registered. Please install at least one linter provider package."`;
+exports[`Lint with @linter/provider-eslint text only 1`] = `
+Array [
+  Object {
+    "errorCount": 0,
+    "messages": Array [],
+    "warningCount": 0,
+  },
+]
+`;
+
+exports[`Lint with no installed linter providers 1`] = `"No linter providers found. Please install at least one linter provider package."`;

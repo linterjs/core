@@ -1,28 +1,29 @@
-import { __clearFiles, __setFiles } from "fs";
+import fs from "jest-plugin-fs";
 import Linter from "./linter";
-import {
-  registerLinterProvider,
-  registeredLinterProvidersFilePath
-} from "./linter-providers";
 
-jest.mock("@linter/eslint");
-jest.mock("fs");
-
-beforeAll(() => {
-  __setFiles({
-    [registeredLinterProvidersFilePath]: ""
-  });
-});
+jest.mock("@linter/provider-eslint");
+jest.mock("fs", () => require("jest-plugin-fs/mock"));
 
 describe("Create Linter", () => {
-  test("without registered linter providers", () => {
+  test("without any linter providers installed", () => {
+    fs.mock({
+      "package.json": "{}"
+    });
+
     expect(() => {
       const linter = new Linter();
     }).toThrowErrorMatchingSnapshot();
   });
 
-  test("with @linter/eslint registered", () => {
-    registerLinterProvider("@linter/eslint");
+  test("with a linter provider installed", () => {
+    fs.mock({
+      "package.json": JSON.stringify({
+        devDependencies: {
+          "@linter/provider-eslint": "1.0.0"
+        }
+      })
+    });
+
     const linter = new Linter();
     expect(linter).toBeInstanceOf(Linter);
   });
