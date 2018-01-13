@@ -1,6 +1,10 @@
 import Linter from "./linter";
 
-export { NoLintersError } from "./errors";
+export {
+  LinterProviderLoadError,
+  NoLinterProvidersError,
+  ModuleNotLinterProviderError
+} from "./errors";
 export { FormatFunction, FormatInput, FormatOutput } from "./format";
 export {
   LintFunction,
@@ -15,9 +19,5 @@ export {
   LinterAdapterLint,
   LinterFactory
 } from "./linter-adapter";
-export {
-  deregisterLinterProvider,
-  LinterProvider,
-  registerLinterProvider
-} from "./linter-providers";
+export { LinterProvider } from "./linter-provider";
 export default Linter;

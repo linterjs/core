@@ -1,6 +1,5 @@
 import { FormatInput, FormatOutput } from "./format";
 import { LintInput, LintOutput } from "./lint";
-import Linter from "./linter";
 
 export type LinterAdapterFormat = (
   { filePath, text }: FormatInput
@@ -19,8 +18,3 @@ export interface LinterAdapter {
 
 // TODO: Support config, configPath, modulePath, etc
 export type LinterFactory = () => LinterAdapter | Promise<LinterAdapter>;
-
-export const loadedLinterAdapterPromises = new WeakMap<
-  Linter,
-  Set<Promise<LinterAdapter>>
->();

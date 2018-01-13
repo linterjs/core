@@ -1,5 +1,6 @@
-import { NoLintersError } from "./errors";
+import { NoLinterProvidersError } from "./errors";
 import { LinterAdapter } from "./linter-adapter";
+import { logger } from "./logger";
 
 export interface LintInput {
   filePath?: string;
@@ -38,7 +39,8 @@ export function createLint(
 ): LintFunction {
   return function lint({ filePath, text }: LintInput): Promise<LintOutput>[] {
     if (linterAdapterPromises.size === 0) {
-      throw new NoLintersError();
+      logger.debug("No linter providers found, not linting.");
+      throw new NoLinterProvidersError();
     }
 
     const lintArgs = { filePath, text };

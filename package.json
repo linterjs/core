@@ -6,6 +6,7 @@
   "dependencies": {
     "common-tags": "^1.7.2",
     "loglevel-colored-level-prefix": "^1.0.0",
+    "read-pkg-up": "^3.0.0",
     "tslib": "^1.8.1"
   },
   "description": "Lint all the things... with one command",

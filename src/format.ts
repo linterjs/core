@@ -1,6 +1,7 @@
-import { NoLintersError } from "./errors";
+import { NoLinterProvidersError } from "./errors";
 import { LintOutput } from "./lint";
 import { LinterAdapter } from "./linter-adapter";
+import { logger } from "./logger";
 
 export interface FormatInput {
   filePath?: string;
@@ -23,7 +24,8 @@ export function createFormat(
     text: inputText
   }: FormatInput): Promise<FormatOutput> {
     if (linterAdapterPromises.size === 0) {
-      throw new NoLintersError();
+      logger.debug("No linter providers found, not formatting.");
+      throw new NoLinterProvidersError();
     }
 
     const defaultResult: FormatOutput = {
