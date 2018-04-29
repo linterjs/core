@@ -2,7 +2,7 @@ import { getDefaultLogLevel } from "./logger";
 
 test("Get default log level", () => {
   const LOG_LEVEL = process.env.LOG_LEVEL;
-  process.env.LOG_LEVEL = undefined;
+  delete process.env.LOG_LEVEL;
 
   expect(getDefaultLogLevel()).toEqual("warn");
 
