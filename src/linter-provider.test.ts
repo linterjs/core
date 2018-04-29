@@ -55,7 +55,7 @@ describe("Load linter providers", () => {
     expect(loadedLinterProviders).toEqual(new Set([eslintLinterProvider]));
   });
 
-  test("with an installed linter provider and a missing optional linter provider", () => {
+  test("with a linter provider installed and a missing optional linter provider", () => {
     fs.mock({
       "package.json": JSON.stringify({
         devDependencies: { "@linter/provider-eslint": "1.0.0" },
