@@ -7,24 +7,24 @@
     "common-tags": "^1.7.2",
     "loglevel-colored-level-prefix": "^1.0.0",
     "read-pkg-up": "^3.0.0",
-    "tslib": "^1.8.1"
+    "tslib": "^1.9.0"
   },
   "description": "Lint all the things... with one command",
   "devDependencies": {
-    "@babel/core": "^7.0.0-beta.37",
-    "@babel/preset-env": "^7.0.0-beta.37",
-    "@types/jest": "^22.0.1",
-    "@types/node": "^9.3.0",
+    "@babel/core": "^7.0.0-beta.46",
+    "@babel/preset-env": "^7.0.0-beta.46",
+    "@types/jest": "^22.2.3",
+    "@types/node": "^9.6.7",
     "babel-core": "^7.0.0-bridge.0",
     "codeclimate-test-reporter": "^0.5.0",
-    "codecov": "^3.0.0",
-    "jest": "^22.0.6",
-    "jest-cli": "^22.0.6",
-    "jest-plugin-fs": "^2.6.0",
-    "jest-plugins": "^2.6.0",
+    "codecov": "^3.0.1",
+    "jest": "^22.4.3",
+    "jest-cli": "^22.4.3",
+    "jest-plugin-fs": "^2.9.0",
+    "jest-plugins": "^2.9.0",
     "rimraf": "^2.6.2",
-    "ts-jest": "^22.0.1",
-    "typescript": "^2.6.2"
+    "ts-jest": "^22.4.4",
+    "typescript": "^2.8.3"
   },
   "engines": {
     "node": ">=8.0.0"
