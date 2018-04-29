@@ -14,8 +14,9 @@ export default class Linter {
   constructor() {
     logger.setLevel(getDefaultLogLevel());
 
-    const linterProviders = loadLinterProvidersFromFile();
     const linterAdapters = new Set<Promise<LinterAdapter>>();
+    const linterProviders = loadLinterProvidersFromFile();
+
     for (const { linterFactory } of linterProviders.values()) {
       linterAdapters.add(Promise.resolve(linterFactory()));
     }
