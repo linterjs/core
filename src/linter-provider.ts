@@ -58,11 +58,7 @@ export function loadLinterProvidersFromFile(): Set<LinterProvider> {
         `);
         logger.trace(error);
 
-        if (
-          Object.keys(optionalDependencies).includes(
-            linterProviderModuleName
-          ) === false
-        ) {
+        if (!optionalDependencies[linterProviderModuleName]) {
           logger.debug(
             "Linter provider module is not optional, throwing error"
           );
