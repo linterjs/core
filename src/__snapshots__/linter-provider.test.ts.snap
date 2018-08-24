@@ -2,6 +2,6 @@
 
 exports[`Load linter providers when a package.json can't be found 1`] = `"No linter providers found. Please install at least one linter provider package."`;
 
-exports[`Load linter providers when an installed linter provider module can't be imported 1`] = `"There was a problem importing the linter provider module:  \\"@linter/provider-nonexistent\\"."`;
+exports[`Load linter providers when an installed linter provider module can't be imported 1`] = `"There was a problem importing the linter provider module: \\"@linter/provider-nonexistent\\"."`;
 
-exports[`Load linter providers when the linter provider package doesn't export a default linter provider 1`] = `"The imported module is not a linter provider:  \\"linter-provider-not-a-provider\\""`;
+exports[`Load linter providers when the linter provider package doesn't export a default linter provider 1`] = `"The imported module is not a linter provider: \\"linter-provider-not-a-provider\\""`;

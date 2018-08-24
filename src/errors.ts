@@ -2,7 +2,7 @@ import { oneLine } from "common-tags";
 
 export class LinterProviderLoadError extends Error {
   message = oneLine`
-    There was a problem importing the linter provider module: 
+    There was a problem importing the linter provider module:
     "${this.linterProviderModuleName}".
   `;
 
@@ -13,7 +13,7 @@ export class LinterProviderLoadError extends Error {
 
 export class ModuleNotLinterProviderError extends Error {
   message = oneLine`
-    The imported module is not a linter provider: 
+    The imported module is not a linter provider:
     "${this.linterProviderModuleName}"
   `;
 
