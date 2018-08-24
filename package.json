@@ -23,6 +23,7 @@
     "jest-cli": "^23.5.0",
     "jest-plugin-fs": "^2.9.0",
     "jest-plugins": "^2.9.0",
+    "npm-check": "^5.8.0",
     "rimraf": "^2.6.2",
     "ts-jest": "^23.1.4",
     "typescript": "^3.0.1"
@@ -41,10 +42,11 @@
     "url": "git+https://github.com/linterjs/core.git"
   },
   "scripts": {
+    "build": "tsc",
+    "check": "npm-check",
     "clean": "rimraf coverage dist",
     "clean:build": "rimraf dist",
     "clean:test": "rimraf coverage",
-    "build": "tsc",
     "prebuild": "npm run clean:build",
     "prepublishOnly": "npm run build",
     "pretest": "npm run clean:test",
