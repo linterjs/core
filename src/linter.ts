@@ -4,7 +4,7 @@ import { LinterAdapter } from "./linter-adapter";
 import { loadLinterProvidersFromFile } from "./linter-provider";
 import { logger, getDefaultLogLevel } from "./logger";
 
-// XXX: Create a new instance of Linter to load/reload registered
+// Create a new instance of Linter to load/reload registered
 // linter providers from file
 export default class Linter {
   format: FormatFunction;

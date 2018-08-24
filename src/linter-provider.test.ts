@@ -4,16 +4,12 @@ import {
   LinterAdapterFormat,
   LinterAdapterLint
 } from "./linter-adapter";
-import { LinterProvider, loadLinterProvidersFromFile } from "./linter-provider";
+import { loadLinterProvidersFromFile } from "./linter-provider";
 
 jest.mock("@linter/provider-eslint");
 jest.mock("@zimme/linter-provider-eslint");
 jest.mock("fs", () => require("jest-plugin-fs/mock"));
 jest.mock("linter-provider-eslint");
-
-beforeAll(() => {
-  fs.root = process.cwd();
-});
 
 afterEach(() => {
   fs.restore();
