@@ -4,6 +4,11 @@ import Linter from "./linter";
 jest.mock("@linter/provider-eslint");
 jest.mock("fs", () => require("jest-plugin-fs/mock"));
 
+afterEach(() => {
+  fs.restore();
+  jest.resetModules();
+});
+
 describe("Create Linter", () => {
   test("without any linter providers installed", () => {
     fs.mock({
