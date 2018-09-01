@@ -39,7 +39,7 @@ export function createFormat(
     return [...linterAdapterPromises.values()].reduce(
       async (accumulatorPromise, linterAdapterPromise) => {
         const accumulator = await accumulatorPromise;
-        const { format } = await linterAdapterPromise;
+        const linterAdapter = await linterAdapterPromise;
 
         let {
           errorCount,
@@ -47,7 +47,7 @@ export function createFormat(
           messages,
           output,
           warningCount
-        } = await format({
+        } = await linterAdapter.format({
           filePath: accumulator.filePath,
           text: accumulator.output
         });

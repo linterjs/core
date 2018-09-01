@@ -49,7 +49,7 @@ export function createLint(
     for (const linterAdapterPromise of linterAdapterPromises.values()) {
       // TODO: Handle error in linterFactory and lint?
       lintOutput.push(
-        Promise.resolve(linterAdapterPromise).then(({ lint }) => lint(lintArgs))
+        Promise.resolve(linterAdapterPromise).then((linterAdapter) => linterAdapter.lint(lintArgs))
       );
     }
 
