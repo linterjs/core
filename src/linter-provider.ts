@@ -22,7 +22,7 @@ function isLinterProviderModule(
 ): linterProviderModule is LinterProviderModule {
   return (
     linterProviderModule.default &&
-    typeof linterProviderModule.default.linterFactory === "function"
+    typeof linterProviderModule.default.factory === "function"
   );
 }
 
