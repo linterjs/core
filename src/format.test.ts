@@ -5,13 +5,11 @@ jest.mock("@linter/provider-prettier");
 
 describe("Format", () => {
   const filePath = "test.js";
-  let format;
-  let linterAdapterPromiseList;
   const text = 'const foo = "bar"';
 
   test("with no installed linter providers", async () => {
     try {
-      format = createFormat(new Set());
+      const format = createFormat(new Set());
       await format({ text });
     } catch (error) {
       expect(error).toMatchSnapshot();
@@ -19,6 +17,9 @@ describe("Format", () => {
   });
 
   describe("with @linter/provider-eslint", () => {
+    let format;
+    let linterAdapterPromiseList;
+
     beforeAll(() => {
       const { factory } = require("@linter/provider-eslint").default;
       linterAdapterPromiseList = [Promise.resolve(factory())];
