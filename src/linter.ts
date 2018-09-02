@@ -17,8 +17,8 @@ export default class Linter {
     const linterAdapters = new Set<Promise<LinterAdapter>>();
     const linterProviders = loadLinterProvidersFromFile();
 
-    for (const { linterFactory } of linterProviders.values()) {
-      linterAdapters.add(Promise.resolve(linterFactory()));
+    for (const { factory } of linterProviders.values()) {
+      linterAdapters.add(Promise.resolve(factory()));
     }
 
     this.format = createFormat(linterAdapters);

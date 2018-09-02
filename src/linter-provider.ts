@@ -9,7 +9,7 @@ import { LinterFactory } from "./linter-adapter";
 import { logger } from "./logger";
 
 export interface LinterProvider {
-  linterFactory: LinterFactory;
+  factory: LinterFactory;
   name: string;
 }
 

@@ -15,8 +15,8 @@ describe("Lint", () => {
 
   describe("with @linter/provider-eslint", () => {
     beforeAll(() => {
-      const { linterFactory } = require("@linter/provider-eslint").default;
-      linterAdapterPromiseList = [Promise.resolve(linterFactory())];
+      const { factory } = require("@linter/provider-eslint").default;
+      linterAdapterPromiseList = [Promise.resolve(factory())];
       lint = createLint(new Set(linterAdapterPromiseList));
     });
 

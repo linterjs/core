@@ -21,7 +21,7 @@ export const linter: LinterAdapter = {
 };
 
 const linterProvider: LinterProvider = {
-  linterFactory: () => linter,
+  factory: () => linter,
   name: "prettier"
 };
 

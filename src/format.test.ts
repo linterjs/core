@@ -20,8 +20,8 @@ describe("Format", () => {
 
   describe("with @linter/provider-eslint", () => {
     beforeAll(() => {
-      const { linterFactory } = require("@linter/provider-eslint").default;
-      linterAdapterPromiseList = [Promise.resolve(linterFactory())];
+      const { factory } = require("@linter/provider-eslint").default;
+      linterAdapterPromiseList = [Promise.resolve(factory())];
       format = createFormat(new Set(linterAdapterPromiseList));
     });
 
@@ -45,9 +45,9 @@ describe("Format", () => {
 
     describe("and @linter/prettier", () => {
       beforeAll(() => {
-        const { linterFactory } = require("@linter/provider-prettier").default;
+        const { factory } = require("@linter/provider-prettier").default;
         linterAdapterPromiseList = [
-          Promise.resolve(linterFactory()),
+          Promise.resolve(factory()),
           ...linterAdapterPromiseList
         ];
         format = createFormat(new Set(linterAdapterPromiseList));
