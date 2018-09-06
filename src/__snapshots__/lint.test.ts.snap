@@ -4,16 +4,18 @@ exports[`Lint with @linter/provider-eslint text and filePath 1`] = `
 Array [
   Object {
     "errorCount": 0,
+    "filePath": "test.js",
     "messages": Array [],
     "warningCount": 0,
   },
 ]
 `;
 
-exports[`Lint with @linter/provider-eslint text only 1`] = `
+exports[`Lint with @linter/provider-eslint with no linter for file extension 1`] = `
 Array [
   Object {
     "errorCount": 0,
+    "filePath": "foo.ts",
     "messages": Array [],
     "warningCount": 0,
   },

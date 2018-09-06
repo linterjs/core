@@ -12,7 +12,7 @@ afterEach(() => {
 describe("Create Linter", () => {
   test("without any linter providers installed", () => {
     fs.mock({
-      "package.json": "{}"
+      "package.json": "{}",
     });
 
     expect(() => {
@@ -24,9 +24,9 @@ describe("Create Linter", () => {
     fs.mock({
       "package.json": JSON.stringify({
         devDependencies: {
-          "@linter/provider-eslint": "1.0.0"
-        }
-      })
+          "@linter/provider-eslint": "1.0.0",
+        },
+      }),
     });
 
     const linter = new Linter();

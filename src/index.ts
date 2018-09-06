@@ -3,7 +3,7 @@ import Linter from "./linter";
 export {
   LinterProviderLoadError,
   NoLinterProvidersError,
-  ModuleNotLinterProviderError
+  ModuleNotLinterProviderError,
 } from "./errors";
 
 export { FormatFunction, FormatInput, FormatOutput } from "./format";
@@ -13,14 +13,14 @@ export {
   LintInput,
   LintMessage,
   LintOutput,
-  LintSeverity
+  LintSeverity,
 } from "./lint";
 
 export {
   LinterAdapter,
   LinterAdapterFormat,
   LinterAdapterLint,
-  LinterFactory
+  LinterFactory,
 } from "./linter-adapter";
 
 export { LinterProvider } from "./linter-provider";

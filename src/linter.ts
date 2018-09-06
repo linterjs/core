@@ -14,15 +14,35 @@ export default class Linter {
   constructor() {
     logger.setLevel(getDefaultLogLevel());
 
-    const linterAdapters = new Set<Promise<LinterAdapter>>();
+    const linterAdapterPromisesBySupportedExtensions = new Map<
+      string,
+      Set<Promise<LinterAdapter>>
+    >();
     const linterProviders = loadLinterProvidersFromFile();
 
-    for (const { factory } of linterProviders.values()) {
-      linterAdapters.add(Promise.resolve(factory()));
+    for (const { factory, supportedExtensions } of linterProviders.values()) {
+      const linterAdapter = Promise.resolve(factory());
+
+      new Set(supportedExtensions).forEach(extension => {
+        const extensionWithDot = extension.includes(".")
+          ? extension
+          : `.${extension}`;
+
+        const linterAdapters =
+          linterAdapterPromisesBySupportedExtensions.get(extensionWithDot) ||
+          new Set<Promise<LinterAdapter>>();
+
+        linterAdapters.add(linterAdapter);
+
+        linterAdapterPromisesBySupportedExtensions.set(
+          extensionWithDot,
+          linterAdapters,
+        );
+      });
     }
 
-    this.format = createFormat(linterAdapters);
-    this.lint = createLint(linterAdapters);
+    this.format = createFormat(linterAdapterPromisesBySupportedExtensions);
+    this.lint = createLint(linterAdapterPromisesBySupportedExtensions);
   }
 
   // XXX: Do we need to add functionality to reload providers from file,

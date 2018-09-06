@@ -1,14 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Format with @linter/provider-eslint and @linter/prettier Text only 1`] = `
-Object {
-  "errorCount": 0,
-  "messages": Array [],
-  "output": "prettier:const foo = \\"bar\\"",
-  "warningCount": 0,
-}
-`;
-
 exports[`Format with @linter/provider-eslint and @linter/prettier text and filePath 1`] = `
 Object {
   "errorCount": 0,
@@ -29,9 +20,10 @@ Object {
 }
 `;
 
-exports[`Format with @linter/provider-eslint text only 1`] = `
+exports[`Format with @linter/provider-eslint with no linter for file extension 1`] = `
 Object {
   "errorCount": 0,
+  "filePath": "foo.ts",
   "messages": Array [],
   "output": "const foo = \\"bar\\"",
   "warningCount": 0,

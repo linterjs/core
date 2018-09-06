@@ -3,7 +3,7 @@ import readPkgUp = require("read-pkg-up");
 import {
   LinterProviderLoadError,
   ModuleNotLinterProviderError,
-  NoLinterProvidersError
+  NoLinterProvidersError,
 } from "./errors";
 import { LinterFactory } from "./linter-adapter";
 import { logger } from "./logger";
@@ -11,6 +11,7 @@ import { logger } from "./logger";
 export interface LinterProvider {
   factory: LinterFactory;
   name: string;
+  supportedExtensions: string[];
 }
 
 interface LinterProviderModule {
@@ -18,7 +19,7 @@ interface LinterProviderModule {
 }
 
 function isLinterProviderModule(
-  linterProviderModule: any
+  linterProviderModule: any,
 ): linterProviderModule is LinterProviderModule {
   return (
     linterProviderModule.default &&
@@ -32,22 +33,22 @@ export function loadLinterProvidersFromFile(): Set<LinterProvider> {
   const {
     dependencies = {},
     devDependencies = {},
-    optionalDependencies = {}
+    optionalDependencies = {},
   } = packageJson;
 
   const linterProviderModuleNames = Object.keys({
     ...dependencies,
     ...devDependencies,
-    ...optionalDependencies
+    ...optionalDependencies,
   }).filter(
     dependency =>
       dependency.startsWith("@linter/provider-") ||
       dependency.startsWith("linter-provider-") ||
-      (dependency.startsWith("@") && dependency.includes("/linter-provider-"))
+      (dependency.startsWith("@") && dependency.includes("/linter-provider-")),
   );
 
   const loadedlinterProviders = linterProviderModuleNames.reduce(
-    (linterProviderAccumulator, linterProviderModuleName) => {
+    (loadedLinterProviderAccumulator, linterProviderModuleName) => {
       let linterProviderModule: LinterProviderModule | undefined;
       try {
         linterProviderModule = require(linterProviderModuleName);
@@ -60,7 +61,7 @@ export function loadLinterProvidersFromFile(): Set<LinterProvider> {
 
         if (!optionalDependencies[linterProviderModuleName]) {
           logger.debug(
-            "Linter provider module is not optional, throwing error"
+            "Linter provider module is not optional, throwing error",
           );
           throw new LinterProviderLoadError(linterProviderModuleName);
         }
@@ -70,23 +71,23 @@ export function loadLinterProvidersFromFile(): Set<LinterProvider> {
         linterProviderModule &&
         isLinterProviderModule(linterProviderModule)
       ) {
-        linterProviderAccumulator.push(linterProviderModule.default);
+        loadedLinterProviderAccumulator.add(linterProviderModule.default);
       } else if (linterProviderModule) {
         throw new ModuleNotLinterProviderError(linterProviderModuleName);
       }
 
-      return linterProviderAccumulator;
+      return loadedLinterProviderAccumulator;
     },
-    [] as LinterProvider[]
+    new Set<LinterProvider>(),
   );
 
-  if (loadedlinterProviders.length === 0) {
+  if (loadedlinterProviders.size === 0) {
     const error = new NoLinterProvidersError();
     logger.debug(error.message);
     throw error;
   }
 
-  return new Set(loadedlinterProviders);
+  return loadedlinterProviders;
 }
 
 // XXX: Add more functionality, enable/disable linters?

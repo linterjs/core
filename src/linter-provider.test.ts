@@ -2,7 +2,7 @@ import fs from "jest-plugin-fs";
 import {
   LinterAdapter,
   LinterAdapterFormat,
-  LinterAdapterLint
+  LinterAdapterLint,
 } from "./linter-adapter";
 import { loadLinterProvidersFromFile } from "./linter-provider";
 
@@ -28,8 +28,8 @@ describe("Load linter providers", () => {
   test("when an installed linter provider module can't be imported", () => {
     fs.mock({
       "package.json": JSON.stringify({
-        devDependencies: { "@linter/provider-nonexistent": "1.0.0" }
-      })
+        devDependencies: { "@linter/provider-nonexistent": "1.0.0" },
+      }),
     });
 
     expect(() => {
@@ -41,9 +41,9 @@ describe("Load linter providers", () => {
     fs.mock({
       "package.json": JSON.stringify({
         dependencies: {
-          "@linter/provider-eslint": "1.0.0"
-        }
-      })
+          "@linter/provider-eslint": "1.0.0",
+        },
+      }),
     });
 
     const eslintLinterProvider = require("@linter/provider-eslint").default;
@@ -55,8 +55,8 @@ describe("Load linter providers", () => {
     fs.mock({
       "package.json": JSON.stringify({
         devDependencies: { "@linter/provider-eslint": "1.0.0" },
-        optionalDependencies: { "@linter/provider-nonexistent": "1.0.0" }
-      })
+        optionalDependencies: { "@linter/provider-nonexistent": "1.0.0" },
+      }),
     });
 
     const eslintLinterProvider = require("@linter/provider-eslint").default;
@@ -70,9 +70,9 @@ describe("Load linter providers", () => {
         devDependencies: {
           "@linter/provider-eslint": "1.0.0",
           "@zimme/linter-provider-eslint": "1.0.0",
-          "linter-provider-eslint": "1.0.0"
-        }
-      })
+          "linter-provider-eslint": "1.0.0",
+        },
+      }),
     });
 
     const eslintLinterProvider = require("@linter/provider-eslint").default;
@@ -84,9 +84,9 @@ describe("Load linter providers", () => {
     fs.mock({
       "package.json": JSON.stringify({
         devDependencies: {
-          "linter-provider-not-a-provider": "1.0.0"
-        }
-      })
+          "linter-provider-not-a-provider": "1.0.0",
+        },
+      }),
     });
 
     expect(() => {

@@ -9,8 +9,8 @@ describe("Format", () => {
 
   test("with no installed linter providers", async () => {
     try {
-      const format = createFormat(new Set());
-      await format({ text });
+      const format = createFormat(new Map());
+      await format({ filePath, text });
     } catch (error) {
       expect(error).toMatchSnapshot();
     }
@@ -23,16 +23,17 @@ describe("Format", () => {
     beforeAll(() => {
       const { factory } = require("@linter/provider-eslint").default;
       linterAdapterPromiseList = [Promise.resolve(factory())];
-      format = createFormat(new Set(linterAdapterPromiseList));
+      format = createFormat(
+        new Map([[".js", new Set(linterAdapterPromiseList)]]),
+      );
     });
 
-    test("text only", async () => {
+    test("with no linter for file extension", async () => {
       const { linter } = require("@linter/provider-eslint");
-      const args = { text };
+      const args = { text, filePath: "foo.ts" };
       const result = await format(args);
       expect(result).toMatchSnapshot();
-      expect(linter.format).toHaveBeenCalledTimes(1);
-      expect(linter.format).toHaveBeenCalledWith(args);
+      expect(linter.format).toHaveBeenCalledTimes(0);
     });
 
     test("text and filePath", async () => {
@@ -40,7 +41,7 @@ describe("Format", () => {
       const args = { filePath, text };
       const result = await format(args);
       expect(result).toMatchSnapshot();
-      expect(linter.format).toHaveBeenCalledTimes(2);
+      expect(linter.format).toHaveBeenCalledTimes(1);
       expect(linter.format).toHaveBeenCalledWith(args);
     });
 
@@ -49,18 +50,11 @@ describe("Format", () => {
         const { factory } = require("@linter/provider-prettier").default;
         linterAdapterPromiseList = [
           Promise.resolve(factory()),
-          ...linterAdapterPromiseList
+          ...linterAdapterPromiseList,
         ];
-        format = createFormat(new Set(linterAdapterPromiseList));
-      });
-
-      test("Text only", async () => {
-        const { linter } = require("@linter/provider-prettier");
-        const args = { text };
-        const result = await format(args);
-        expect(result).toMatchSnapshot();
-        expect(linter.format).toHaveBeenCalledTimes(1);
-        expect(linter.format).toHaveBeenCalledWith(args);
+        format = createFormat(
+          new Map([[".js", new Set(linterAdapterPromiseList)]]),
+        );
       });
 
       test("text and filePath", async () => {
@@ -68,7 +62,7 @@ describe("Format", () => {
         const args = { text, filePath };
         const result = await format(args);
         expect(result).toMatchSnapshot();
-        expect(linter.format).toHaveBeenCalledTimes(2);
+        expect(linter.format).toHaveBeenCalledTimes(1);
         expect(linter.format).toHaveBeenCalledWith(args);
       });
     });

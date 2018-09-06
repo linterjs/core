@@ -1,15 +1,16 @@
+import { extname } from "path";
 import { NoLinterProvidersError } from "./errors";
 import { LinterAdapter } from "./linter-adapter";
 import { logger } from "./logger";
 
 export interface LintInput {
-  filePath?: string;
+  filePath: string;
   text: string;
 }
 
 export const enum LintSeverity {
   WARNING = 1,
-  ERROR = 2
+  ERROR = 2,
 }
 
 export interface LintMessage {
@@ -25,22 +26,40 @@ export interface LintMessage {
 
 export interface LintOutput {
   errorCount: number;
-  filePath?: string;
+  filePath: string;
   messages: LintMessage[];
   warningCount: number;
 }
 
 export type LintFunction = (
-  { filePath, text }: LintInput
+  { filePath, text }: LintInput,
 ) => Promise<LintOutput>[];
 
 export function createLint(
-  linterAdapterPromises: Set<Promise<LinterAdapter>>
+  linterAdapterPromisesBySupportedExtensions: Map<
+    string,
+    Set<Promise<LinterAdapter>>
+  >,
 ): LintFunction {
   return function lint({ filePath, text }: LintInput): Promise<LintOutput>[] {
-    if (linterAdapterPromises.size === 0) {
+    if (linterAdapterPromisesBySupportedExtensions.size === 0) {
       logger.debug("No linter providers found, not linting.");
       throw new NoLinterProvidersError();
+    }
+
+    const defaultResult: LintOutput = {
+      filePath,
+      errorCount: 0,
+      messages: [],
+      warningCount: 0,
+    };
+
+    const linterAdapterPromises = linterAdapterPromisesBySupportedExtensions.get(
+      extname(filePath),
+    );
+
+    if (!linterAdapterPromises || linterAdapterPromises.size === 0) {
+      return [Promise.resolve(defaultResult)];
     }
 
     const lintArgs = { filePath, text };
@@ -49,7 +68,9 @@ export function createLint(
     for (const linterAdapterPromise of linterAdapterPromises.values()) {
       // TODO: Handle error in linterFactory and lint?
       lintOutput.push(
-        Promise.resolve(linterAdapterPromise).then((linterAdapter) => linterAdapter.lint(lintArgs))
+        Promise.resolve(linterAdapterPromise).then(linterAdapter =>
+          linterAdapter.lint(lintArgs),
+        ),
       );
     }
 

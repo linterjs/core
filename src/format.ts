@@ -1,10 +1,11 @@
+import { extname } from "path";
 import { NoLinterProvidersError } from "./errors";
 import { LintOutput } from "./lint";
 import { LinterAdapter } from "./linter-adapter";
 import { logger } from "./logger";
 
 export interface FormatInput {
-  filePath?: string;
+  filePath: string;
   text: string;
 }
 
@@ -13,56 +14,65 @@ export interface FormatOutput extends LintOutput {
 }
 
 export type FormatFunction = (
-  { filePath, text }: FormatInput
+  { filePath, text }: FormatInput,
 ) => Promise<FormatOutput>;
 
 export function createFormat(
-  linterAdapterPromises: Set<Promise<LinterAdapter>>
+  linterAdapterPromisesBySupportedExtensions: Map<
+    string,
+    Set<Promise<LinterAdapter>>
+  >,
 ): FormatFunction {
   return async function format({
     filePath: inputFilePath,
-    text: inputText
+    text: inputText,
   }: FormatInput): Promise<FormatOutput> {
-    if (linterAdapterPromises.size === 0) {
+    if (linterAdapterPromisesBySupportedExtensions.size === 0) {
       logger.debug("No linter providers found, not formatting.");
       throw new NoLinterProvidersError();
     }
 
     const defaultResult: FormatOutput = {
       errorCount: 0,
-      ...(inputFilePath && { filePath: inputFilePath }),
+      filePath: inputFilePath,
       messages: [],
       output: inputText,
-      warningCount: 0
+      warningCount: 0,
     };
+
+    const linterAdapterPromises = linterAdapterPromisesBySupportedExtensions.get(
+      extname(inputFilePath),
+    );
+
+    if (!linterAdapterPromises || linterAdapterPromises.size === 0) {
+      return defaultResult;
+    }
 
     return [...linterAdapterPromises.values()].reduce(
       async (accumulatorPromise, linterAdapterPromise) => {
         const accumulator = await accumulatorPromise;
         const linterAdapter = await linterAdapterPromise;
 
-        let {
+        const {
           errorCount,
           filePath,
           messages,
           output,
-          warningCount
+          warningCount,
         } = await linterAdapter.format({
           filePath: accumulator.filePath,
-          text: accumulator.output
+          text: accumulator.output,
         });
 
         accumulator.errorCount += errorCount;
-        if (filePath) {
-          accumulator.filePath = filePath;
-        }
+        accumulator.filePath = filePath;
         accumulator.messages.concat(messages);
         accumulator.output = output;
         accumulator.warningCount += warningCount;
 
         return accumulator;
       },
-      Promise.resolve(defaultResult)
+      Promise.resolve(defaultResult),
     );
   };
 }
