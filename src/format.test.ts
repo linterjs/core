@@ -1,8 +1,5 @@
 import { createFormat } from "./format";
 
-jest.mock("@linter/provider-eslint");
-jest.mock("@linter/provider-prettier");
-
 describe("Format", () => {
   const filePath = "test.js";
   const text = 'const foo = "bar"';

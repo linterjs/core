@@ -6,10 +6,7 @@ import {
 } from "./linter-adapter";
 import { loadLinterProvidersFromFile } from "./linter-provider";
 
-jest.mock("@linter/provider-eslint");
-jest.mock("@zimme/linter-provider-eslint");
 jest.mock("fs", () => require("jest-plugin-fs/mock"));
-jest.mock("linter-provider-eslint");
 
 afterEach(() => {
   fs.restore();

@@ -1,7 +1,6 @@
 import fs from "jest-plugin-fs";
 import Linter from "./linter";
 
-jest.mock("@linter/provider-eslint");
 jest.mock("fs", () => require("jest-plugin-fs/mock"));
 
 afterEach(() => {
