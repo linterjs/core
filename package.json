@@ -7,6 +7,7 @@
     "common-tags": "^1.8.0",
     "loglevel-colored-level-prefix": "^1.0.0",
     "read-pkg-up": "^4.0.0",
+    "require-relative": "^0.8.7",
     "tslib": "^1.9.3"
   },
   "description": "Lint all the things... with one command",

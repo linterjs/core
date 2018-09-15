@@ -1,5 +1,6 @@
 import { oneLine } from "common-tags";
 import readPkgUp = require("read-pkg-up");
+import requireRelative = require("require-relative");
 import {
   LinterProviderLoadError,
   ModuleNotLinterProviderError,
@@ -51,7 +52,7 @@ export function loadLinterProvidersFromFile(): Set<LinterProvider> {
     (loadedLinterProviderAccumulator, linterProviderModuleName) => {
       let linterProviderModule: LinterProviderModule | undefined;
       try {
-        linterProviderModule = require(linterProviderModuleName);
+        linterProviderModule = requireRelative(linterProviderModuleName);
       } catch (error) {
         logger.debug(oneLine`
           Could not import "${linterProviderModuleName}",
