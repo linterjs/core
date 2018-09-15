@@ -2,7 +2,7 @@ import {
   LinterAdapter,
   LinterAdapterFormat,
   LinterAdapterLint,
-  LinterFactory
+  LinterFactory,
 } from "../../src/linter-adapter";
 import { LinterProvider } from "../../src/linter-provider";
 
@@ -12,14 +12,14 @@ const linter: LinterAdapter = {
     errorCount: 0,
     messages: [],
     output: text,
-    warningCount: 0
+    warningCount: 0,
   })),
   lint: jest.fn<LinterAdapterLint>(({ filePath }) => ({
     filePath,
     errorCount: 0,
     messages: [],
-    warningCount: 0
-  }))
+    warningCount: 0,
+  })),
 };
 
 const linterFactory: LinterFactory = () => linter;
@@ -27,7 +27,7 @@ const linterFactory: LinterFactory = () => linter;
 const linterProvider: LinterProvider = {
   factory: linterFactory,
   name: "eslint",
-  supportedExtensions: [".js", "jsx"]
+  supportedExtensions: [".js", "jsx"],
 };
 
 export { linter, linterFactory, linterProvider as default };

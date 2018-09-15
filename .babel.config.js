@@ -4,9 +4,9 @@ module.exports = {
       "@babel/env",
       {
         targets: {
-          node: "current"
-        }
-      }
-    ]
-  ]
+          node: "current",
+        },
+      },
+    ],
+  ],
 };

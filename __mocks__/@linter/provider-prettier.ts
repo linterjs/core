@@ -2,7 +2,7 @@ import {
   LinterAdapter,
   LinterAdapterFormat,
   LinterAdapterLint,
-  LinterFactory
+  LinterFactory,
 } from "../../src/linter-adapter";
 import { LinterProvider } from "../../src/linter-provider";
 
@@ -30,7 +30,7 @@ const linterFactory: LinterFactory = () => linter;
 const linterProvider: LinterProvider = {
   factory: linterFactory,
   name: "prettier",
-  supportedExtensions: ["js", "jsx"]
+  supportedExtensions: ["js", "jsx"],
 };
 
 export { linter, linterFactory, linterProvider as default };

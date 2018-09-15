@@ -20,9 +20,7 @@
     "**/*.spec.*",
     "**/*.test.*"
   ],
-  "include": [
-    "./src"
-  ],
+  "include": ["./src"],
   "plugins": [
     {
       "name": "tslint-language-service"
