@@ -1,0 +1,57 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        node: [12.x, 14.x]
+      fail-fast: false
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set node version to ${{ matrix.node }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Versions
+        run: yarn versions
+
+      - name: Install dependencies
+        run: yarn install #--frozen-lockfile
+
+      # - name: Check
+      #   run: yarn check
+
+      # - name: Lint
+      #   run: yarn lint
+
+      - name: Audit dependencies
+        run: yarn audit --groups dependencies
+
+      # - name: Audit devDependencies
+      #   run: yarn audit --groups devDependencies
+
+      # - name: Audit peerDependencies
+      #   run: yarn audit --groups peerDependencies
+
+      # - name: Audit optionalDependencies
+      #   run: yarn audit --groups optionalDependencies
+
+      - name: Build
+        run: yarn build
+
+      - name: Test
+        run: yarn test
+
+      - name: Codecov
+        run: yarn codecov
+
+      - name: Codeclimate
+        run: yarn codeclimate-test-reporter < ./coverage/lcov.info
