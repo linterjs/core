@@ -8,7 +8,5 @@
 [![Discord chat](https://img.shields.io/badge/chat-on%20discord-7289da.svg)](https://discord.gg/cNUqYNq)
 [![Spectrum chat](https://raw.githubusercontent.com/withspectrum/badge/5da682a8369e3b03b50acea6dee23d18ee29a12f/badge_small.svg)](https://spectrum.chat/linterjs?tab=posts)
 
-<!-- [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.svg)](https://gitter.im/linterjs/general) -->
-
 This is the core component of `@linter`. This is used by the cli,
 editor integrations and linter providers.
