@@ -49,9 +49,3 @@ jobs:
 
       - name: Test
         run: yarn test
-
-      - name: Codecov
-        run: yarn codecov
-
-      - name: Codeclimate
-        run: yarn codeclimate-test-reporter < ./coverage/lcov.info
