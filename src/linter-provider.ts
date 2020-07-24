@@ -42,7 +42,7 @@ export function loadLinterProvidersFromFile(): Set<LinterProvider> {
     ...devDependencies,
     ...optionalDependencies,
   }).filter(
-    dependency =>
+    (dependency) =>
       dependency.startsWith("@linter/provider-") ||
       dependency.startsWith("linter-provider-") ||
       (dependency.startsWith("@") && dependency.includes("/linter-provider-")),

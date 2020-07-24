@@ -23,7 +23,7 @@ export default class Linter {
     for (const { factory, supportedExtensions } of linterProviders.values()) {
       const linterAdapter = Promise.resolve(factory());
 
-      new Set(supportedExtensions).forEach(extension => {
+      new Set(supportedExtensions).forEach((extension) => {
         const extensionWithDot = extension.includes(".")
           ? extension
           : `.${extension}`;
