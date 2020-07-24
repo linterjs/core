@@ -26,8 +26,8 @@ jobs:
       - name: Install dependencies
         run: yarn install #--frozen-lockfile
 
-      # - name: Check
-      #   run: yarn check
+      - name: Check outdated dependencies
+        run: yarn outdated
 
       - name: Lint
         run: yarn lint
