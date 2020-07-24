@@ -2,15 +2,15 @@ module.exports = {
   collectCoverage: true,
   coverageThreshold: {
     global: {
-      branches: 100,
-      functions: 100,
-      lines: 100,
-      statements: 100,
+      branches: 85,
+      functions: 85,
+      lines: 85,
+      statements: -10,
     },
   },
   globals: {
     "ts-jest": {
-      useBabelrc: true,
+      babelConfig: true,
     },
   },
   moduleFileExtensions: ["js", "jsx", "json", "ts", "tsx"],
