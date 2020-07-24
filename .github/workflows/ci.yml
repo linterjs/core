@@ -29,8 +29,8 @@ jobs:
       # - name: Check
       #   run: yarn check
 
-      # - name: Lint
-      #   run: yarn lint
+      - name: Lint
+        run: yarn lint
 
       - name: Audit dependencies
         run: yarn audit --groups dependencies

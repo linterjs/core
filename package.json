@@ -57,6 +57,7 @@
     "clean:build": "rimraf dist",
     "clean:test": "rimraf coverage",
     "format": "prettier --write .",
+    "lint": "echo Currently no linter installed",
     "prebuild": "npm run clean:build",
     "prepublishOnly": "npm run build",
     "pretest": "npm run clean:test",
