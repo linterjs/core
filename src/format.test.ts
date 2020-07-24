@@ -1,4 +1,4 @@
-import { createFormat } from "./format";
+import { createFormat, FormatFunction } from "./format";
 
 describe("Format", () => {
   const filePath = "test.js";
@@ -14,8 +14,8 @@ describe("Format", () => {
   });
 
   describe("with @linter/provider-eslint", () => {
-    let format;
-    let linterAdapterPromiseList;
+    let format: FormatFunction;
+    let linterAdapterPromiseList: Array<Promise<any>>;
 
     beforeAll(() => {
       const { factory } = require("@linter/provider-eslint").default;
