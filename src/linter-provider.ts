@@ -29,13 +29,11 @@ function isLinterProviderModule(
 }
 
 export function loadLinterProvidersFromFile(): Set<LinterProvider> {
-  const { pkg: packageJson = {} } = readPkgUp.sync({ normalize: false });
+  const { packageJson } = readPkgUp.sync({ normalize: false }) ?? {};
 
-  const {
-    dependencies = {},
-    devDependencies = {},
-    optionalDependencies = {},
-  } = packageJson;
+  const dependencies = packageJson?.dependencies ?? {};
+  const devDependencies = packageJson?.devDependencies ?? {};
+  const optionalDependencies = packageJson?.optionalDependencies ?? {};
 
   const linterProviderModuleNames = Object.keys({
     ...dependencies,
