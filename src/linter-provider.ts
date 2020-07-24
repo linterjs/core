@@ -1,6 +1,4 @@
 import { oneLine } from "common-tags";
-import readPkgUp = require("read-pkg-up");
-import requireRelative = require("require-relative");
 import {
   LinterProviderLoadError,
   ModuleNotLinterProviderError,
@@ -8,6 +6,8 @@ import {
 } from "./errors";
 import { LinterFactory } from "./linter-adapter";
 import { logger } from "./logger";
+import readPkgUp = require("read-pkg-up");
+import requireRelative = require("require-relative");
 
 export interface LinterProvider {
   factory: LinterFactory;

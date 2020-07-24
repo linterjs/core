@@ -2,7 +2,7 @@ import { createFormat, FormatFunction } from "./format";
 import { createLint, LintFunction } from "./lint";
 import { LinterAdapter } from "./linter-adapter";
 import { loadLinterProvidersFromFile } from "./linter-provider";
-import { logger, getDefaultLogLevel } from "./logger";
+import { getDefaultLogLevel, logger } from "./logger";
 
 // Create a new instance of Linter to load/reload registered
 // linter providers from file
