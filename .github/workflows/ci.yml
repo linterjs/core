@@ -24,7 +24,7 @@ jobs:
         run: yarn versions
 
       - name: Install dependencies
-        run: yarn install #--frozen-lockfile
+        run: yarn install --frozen-lockfile
 
       - name: Check outdated dependencies
         run: yarn outdated
