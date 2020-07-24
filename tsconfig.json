@@ -4,14 +4,14 @@
     "declaration": true,
     "downlevelIteration": true,
     "importHelpers": true,
-    "module": "commonjs",
+    "module": "CommonJS",
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "outDir": "dist",
     "preserveConstEnums": true,
     "removeComments": true,
     "strictNullChecks": true,
-    "target": "es2017"
+    "target": "ES2017"
   },
   "exclude": [
     "**/__mocks__",
