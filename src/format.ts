@@ -13,9 +13,10 @@ export interface FormatOutput extends LintOutput {
   output: string;
 }
 
-export type FormatFunction = (
-  { filePath, text }: FormatInput,
-) => Promise<FormatOutput>;
+export type FormatFunction = ({
+  filePath,
+  text,
+}: FormatInput) => Promise<FormatOutput>;
 
 export function createFormat(
   linterAdapterPromisesBySupportedExtensions: Map<

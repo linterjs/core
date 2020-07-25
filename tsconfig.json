@@ -1,29 +1,22 @@
 {
-  "compileOnSave": false,
   "compilerOptions": {
     "declaration": true,
     "downlevelIteration": true,
     "importHelpers": true,
-    "module": "commonjs",
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    "module": "CommonJS",
     "outDir": "dist",
     "preserveConstEnums": true,
     "removeComments": true,
-    "strictNullChecks": true,
-    "target": "es2017"
+    "strict": true,
+    "target": "ES2018"
   },
   "exclude": [
+    "node_modules",
     "**/__mocks__",
     "**/__snapshots__",
     "**/__tests__",
     "**/*.spec.*",
     "**/*.test.*"
   ],
-  "include": ["./src"],
-  "plugins": [
-    {
-      "name": "tslint-language-service"
-    }
-  ]
+  "include": ["src/**/*"]
 }

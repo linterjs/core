@@ -31,9 +31,10 @@ export interface LintOutput {
   warningCount: number;
 }
 
-export type LintFunction = (
-  { filePath, text }: LintInput,
-) => Promise<LintOutput>[];
+export type LintFunction = ({
+  filePath,
+  text,
+}: LintInput) => Promise<LintOutput>[];
 
 export function createLint(
   linterAdapterPromisesBySupportedExtensions: Map<
@@ -68,7 +69,7 @@ export function createLint(
     for (const linterAdapterPromise of linterAdapterPromises.values()) {
       // TODO: Handle error in linterFactory and lint?
       lintOutput.push(
-        Promise.resolve(linterAdapterPromise).then(linterAdapter =>
+        Promise.resolve(linterAdapterPromise).then((linterAdapter) =>
           linterAdapter.lint(lintArgs),
         ),
       );

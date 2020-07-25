@@ -1,6 +1,7 @@
-import { oneLine } from "common-tags";
 import readPkgUp = require("read-pkg-up");
 import requireRelative = require("require-relative");
+
+import { oneLine } from "common-tags";
 import {
   LinterProviderLoadError,
   ModuleNotLinterProviderError,
@@ -29,20 +30,18 @@ function isLinterProviderModule(
 }
 
 export function loadLinterProvidersFromFile(): Set<LinterProvider> {
-  const { pkg: packageJson = {} } = readPkgUp.sync({ normalize: false });
+  const { packageJson } = readPkgUp.sync({ normalize: false }) ?? {};
 
-  const {
-    dependencies = {},
-    devDependencies = {},
-    optionalDependencies = {},
-  } = packageJson;
+  const dependencies = packageJson?.dependencies ?? {};
+  const devDependencies = packageJson?.devDependencies ?? {};
+  const optionalDependencies = packageJson?.optionalDependencies ?? {};
 
   const linterProviderModuleNames = Object.keys({
     ...dependencies,
     ...devDependencies,
     ...optionalDependencies,
   }).filter(
-    dependency =>
+    (dependency) =>
       dependency.startsWith("@linter/provider-") ||
       dependency.startsWith("linter-provider-") ||
       (dependency.startsWith("@") && dependency.includes("/linter-provider-")),

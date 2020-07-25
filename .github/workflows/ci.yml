@@ -24,13 +24,13 @@ jobs:
         run: yarn versions
 
       - name: Install dependencies
-        run: yarn install #--frozen-lockfile
+        run: yarn install --frozen-lockfile
 
-      # - name: Check
-      #   run: yarn check
+      - name: Check outdated dependencies
+        run: yarn outdated
 
-      # - name: Lint
-      #   run: yarn lint
+      - name: Lint
+        run: yarn lint
 
       - name: Audit dependencies
         run: yarn audit --groups dependencies

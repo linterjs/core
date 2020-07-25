@@ -1,9 +1,4 @@
 import fs from "jest-plugin-fs";
-import {
-  LinterAdapter,
-  LinterAdapterFormat,
-  LinterAdapterLint,
-} from "./linter-adapter";
 import { loadLinterProvidersFromFile } from "./linter-provider";
 
 jest.mock("fs", () => require("jest-plugin-fs/mock"));
