@@ -4,11 +4,11 @@
     "url": "https://github.com/linterjs/core/issues"
   },
   "dependencies": {
-    "common-tags": "~1.8.0",
-    "loglevel-colored-level-prefix": "~1.0.0",
-    "read-pkg-up": "~7.0.1",
-    "require-relative": "~0.8.7",
-    "tslib": "~2.0.0"
+    "common-tags": "^1.8.0",
+    "loglevel-colored-level-prefix": "^1.0.0",
+    "read-pkg-up": "^7.0.1",
+    "require-relative": "^0.8.7",
+    "tslib": "^2.0.0"
   },
   "description": "Lint all the things... with one command",
   "devDependencies": {
