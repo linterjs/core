@@ -12,6 +12,7 @@
   },
   "exclude": [
     "node_modules",
+    "tests/**/*",
     "**/__mocks__",
     "**/__snapshots__",
     "**/__tests__",

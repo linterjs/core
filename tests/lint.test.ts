@@ -1,5 +1,5 @@
-import { createLint, LintFunction } from "./lint";
-import { LinterAdapter } from "./linter-adapter";
+import { createLint, LintFunction } from "../src/lint";
+import { LinterAdapter } from "../src/linter-adapter";
 
 jest.mock("@linter/provider-eslint");
 

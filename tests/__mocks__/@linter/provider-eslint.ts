@@ -3,8 +3,8 @@ import {
   LinterAdapterFormat,
   LinterAdapterLint,
   LinterFactory,
-} from "../../src/linter-adapter";
-import { LinterProvider } from "../../src/linter-provider";
+} from "../../../src/linter-adapter";
+import { LinterProvider } from "../../../src/linter-provider";
 
 const linter: LinterAdapter = {
   format: jest.fn<LinterAdapterFormat>(({ filePath, text }) => ({

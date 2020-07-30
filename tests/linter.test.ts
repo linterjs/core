@@ -1,5 +1,5 @@
 import fs from "jest-plugin-fs";
-import Linter from "./linter";
+import Linter from "../src/linter";
 
 jest.mock("fs", () => require("jest-plugin-fs/mock"));
 
