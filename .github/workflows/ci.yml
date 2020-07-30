@@ -1,6 +1,12 @@
 name: CI
 
-on: [push]
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - "**"
 
 jobs:
   build:
@@ -29,7 +35,7 @@ jobs:
       - name: Check outdated dependencies
         run: yarn outdated
 
-      - name: Lint
+      - name: Lint code
         run: yarn lint
 
       - name: Audit dependencies
@@ -47,5 +53,16 @@ jobs:
       - name: Build
         run: yarn build
 
-      - name: Test
+      - name: Run unit tests
         run: yarn test
+        env:
+          CI: true
+
+      - name: Publish code coverage report
+        uses: codecov/codecov-action@v1
+        if: matrix.os == 'ubuntu-latest' && matrix.node == '12.x'
+        with:
+          yml: ./codecov.yml
+          token: ${{ secrets.CODECOV_TOKEN }}
+          flags: unittest
+          name: codecov
