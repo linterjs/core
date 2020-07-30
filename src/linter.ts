@@ -2,7 +2,6 @@ import { createFormat, FormatFunction } from "./format";
 import { createLint, LintFunction } from "./lint";
 import { LinterAdapter } from "./linter-adapter";
 import { loadLinterProvidersFromFile } from "./linter-provider";
-import { getDefaultLogLevel, logger } from "./logger";
 
 // Create a new instance of Linter to load/reload registered
 // linter providers from file
@@ -12,8 +11,6 @@ export default class Linter {
 
   // TODO: Support config/options
   constructor() {
-    logger.setLevel(getDefaultLogLevel());
-
     const linterAdapterPromisesBySupportedExtensions = new Map<
       string,
       Set<Promise<LinterAdapter>>

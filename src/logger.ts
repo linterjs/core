@@ -1,8 +1,11 @@
-import getLogger = require("loglevel-colored-level-prefix");
-import { LogLevelDesc } from "loglevel";
+import { createLogger, format, transports } from "winston";
 
-export function getDefaultLogLevel(): LogLevelDesc {
-  return (process.env.LOG_LEVEL as LogLevelDesc | undefined) ?? "warn";
-}
-
-export const logger = getLogger({ prefix: "@linter/core" });
+export const logger = createLogger({
+  level: process.env.LOG_LEVEL ?? "warn",
+  // defaultMeta: {
+  //   prefix: "@linter/core",
+  // },
+  transports: new transports.Console({
+    format: format.simple(),
+  }),
+});
