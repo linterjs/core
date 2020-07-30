@@ -7,19 +7,19 @@ import {
 import { LinterProvider } from "../../src/linter-provider";
 
 const linter: LinterAdapter = {
-  format: jest.fn<LinterAdapterFormat>(({ filePath, text }) => ({
+  format: jest.fn(({ filePath, text }) => ({
     filePath,
     errorCount: 0,
     messages: [],
     output: text,
     warningCount: 0,
-  })),
-  lint: jest.fn<LinterAdapterLint>(({ filePath }) => ({
+  })) as LinterAdapterFormat,
+  lint: jest.fn(({ filePath }) => ({
     filePath,
     errorCount: 0,
     messages: [],
     warningCount: 0,
-  })),
+  })) as LinterAdapterLint,
 };
 
 const linterFactory: LinterFactory = () => linter;
