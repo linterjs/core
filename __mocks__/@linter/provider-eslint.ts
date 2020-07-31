@@ -14,7 +14,7 @@ const linter: LinterAdapter = {
     output: text,
     warningCount: 0,
   })) as LinterAdapterFormat,
-  lint: jest.fn(({ filePath }) => ({
+  lint: jest.fn(({ filePath, text }) => ({
     filePath,
     errorCount: 0,
     messages: [],
