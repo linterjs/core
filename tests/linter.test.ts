@@ -1,16 +1,16 @@
-import fs from "jest-plugin-fs";
+import { vol } from "memfs";
 import Linter from "../src/linter";
 
-jest.mock("fs", () => require("jest-plugin-fs/mock"));
+jest.mock("fs");
 
 afterEach(() => {
-  fs.restore();
+  vol.reset();
   jest.resetModules();
 });
 
 describe("Create Linter", () => {
   test("without any linter providers installed", () => {
-    fs.mock({
+    vol.fromJSON({
       "package.json": "{}",
     });
 
@@ -20,7 +20,7 @@ describe("Create Linter", () => {
   });
 
   test("with a linter provider installed", () => {
-    fs.mock({
+    vol.fromJSON({
       "package.json": JSON.stringify({
         devDependencies: {
           "@linter/provider-eslint": "1.0.0",
