@@ -7,6 +7,7 @@ import {
 } from "./errors";
 import { LinterFactory } from "./linter-adapter";
 import { logger } from "./logger";
+import requireRelative = require("require-relative");
 
 export interface LinterProvider {
   factory: LinterFactory;
@@ -49,7 +50,10 @@ export function loadLinterProvidersFromFile(): Set<LinterProvider> {
     (loadedLinterProviderAccumulator, linterProviderModuleName) => {
       let linterProviderModule: LinterProviderModule | undefined;
       try {
-        linterProviderModule = require(linterProviderModuleName);
+        const modulePath = require.resolve(linterProviderModuleName, {
+          paths: [process.cwd()],
+        });
+        linterProviderModule = require(modulePath);
       } catch (error) {
         logger.debug(oneLine`
           Could not import "${linterProviderModuleName}",

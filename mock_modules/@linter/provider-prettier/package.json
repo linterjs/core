@@ -1,0 +1,8 @@
+{
+  "name": "@linter/provider-prettier",
+  "version": "1.0.0-mock",
+  "main": "index.js",
+  "author": "Simon Fridlund <simon@fridlund.email>",
+  "license": "UNLICENSED",
+  "private": true
+}

@@ -1,30 +1,22 @@
-import {
-  LinterAdapter,
-  LinterAdapterFormat,
-  LinterAdapterLint,
-  LinterFactory,
-} from "../../src/linter-adapter";
-import { LinterProvider } from "../../src/linter-provider";
-
-const linter: LinterAdapter = {
+const linter = {
   format: jest.fn(({ filePath, text }) => ({
     filePath,
     errorCount: 0,
     messages: [],
     output: text,
     warningCount: 0,
-  })) as LinterAdapterFormat,
+  })),
   lint: jest.fn(({ filePath, text }) => ({
     filePath,
     errorCount: 0,
     messages: [],
     warningCount: 0,
-  })) as LinterAdapterLint,
+  })),
 };
 
-const linterFactory: LinterFactory = () => linter;
+const linterFactory = () => linter;
 
-const linterProvider: LinterProvider = {
+const linterProvider = {
   factory: linterFactory,
   name: "eslint",
   supportedExtensions: [".js", "jsx"],

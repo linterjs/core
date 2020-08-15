@@ -2,10 +2,10 @@ module.exports = {
   collectCoverage: true,
   coverageThreshold: {
     global: {
-      branches: 85,
-      functions: 85,
-      lines: 85,
-      statements: -10,
+      branches: 100,
+      functions: 100,
+      lines: 100,
+      statements: 100,
     },
   },
   globals: {
@@ -15,8 +15,12 @@ module.exports = {
   },
   moduleFileExtensions: ["js", "jsx", "json", "ts", "tsx"],
   testEnvironment: "node",
-  testMatch: ["**/__tests__/**/*.(j|t)s?(x)", "**/?(*.)(spec|test).(j|t)s?(x)"],
+  testMatch: ["**/tests/**/*.(j|t)s?(x)"],
   transform: {
     "^.+\\.tsx?$": "ts-jest",
+    "^.+\\.jsx?$": "babel-jest",
   },
+  transformIgnorePatterns: [
+    "/node_modules/(?!(@linter/provider-.*|@zimme/linter-provider-.*|linter-provider-.*)/)",
+  ],
 };
