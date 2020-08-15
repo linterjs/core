@@ -1,7 +1,7 @@
 {
   "name": "@linter/provider-eslint",
   "version": "1.0.0-mock",
-  "main": "index.js",
+  "main": "index.ts",
   "author": "Simon Fridlund <simon@fridlund.email>",
   "license": "UNLICENSED",
   "private": true

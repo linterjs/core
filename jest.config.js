@@ -1,3 +1,6 @@
+const { pathsToModuleNameMapper } = require("ts-jest/utils");
+const { compilerOptions } = require("./tsconfig");
+
 module.exports = {
   collectCoverage: true,
   coverageThreshold: {
@@ -8,19 +11,9 @@ module.exports = {
       statements: 100,
     },
   },
-  globals: {
-    "ts-jest": {
-      babelConfig: true,
-    },
-  },
-  moduleFileExtensions: ["js", "jsx", "json", "ts", "tsx"],
-  testEnvironment: "node",
-  testMatch: ["**/tests/**/*.(j|t)s?(x)"],
-  transform: {
-    "^.+\\.tsx?$": "ts-jest",
-    "^.+\\.jsx?$": "babel-jest",
-  },
+  preset: "ts-jest/presets/js-with-babel",
   transformIgnorePatterns: [
     "/node_modules/(?!(@linter/provider-.*|@zimme/linter-provider-.*|linter-provider-.*)/)",
   ],
+  moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths),
 };

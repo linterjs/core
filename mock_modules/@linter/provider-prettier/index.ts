@@ -1,4 +1,12 @@
-const linter = {
+import {
+  LinterFactory,
+  LinterProvider,
+  LinterAdapter,
+  LinterAdapterFormat,
+  LinterAdapterLint,
+} from "@linter/core";
+
+const linter: LinterAdapter = {
   format: jest.fn(({ filePath, text }) =>
     Promise.resolve({
       filePath,
@@ -7,7 +15,7 @@ const linter = {
       output: `prettier:${text}`,
       warningCount: 0,
     }),
-  ),
+  ) as LinterAdapterFormat,
   lint: jest.fn(({ filePath }) =>
     Promise.resolve({
       filePath,
@@ -15,12 +23,12 @@ const linter = {
       messages: [],
       warningCount: 0,
     }),
-  ),
+  ) as LinterAdapterLint,
 };
 
-const linterFactory = () => linter;
+const linterFactory: LinterFactory = () => linter;
 
-const linterProvider = {
+const linterProvider: LinterProvider = {
   factory: linterFactory,
   name: "prettier",
   supportedExtensions: ["js", "jsx"],
