@@ -1,13 +1,13 @@
 import {
+  LinterFactory,
+  LinterProvider,
   LinterAdapter,
   LinterAdapterFormat,
   LinterAdapterLint,
-  LinterFactory,
-} from "../../src/linter-adapter";
-import { LinterProvider } from "../../src/linter-provider";
+} from "@linter/core";
 
 const linter: LinterAdapter = {
-  format: jest.fn<LinterAdapterFormat>(({ filePath, text }) =>
+  format: jest.fn(({ filePath, text }) =>
     Promise.resolve({
       filePath,
       errorCount: 0,
@@ -15,14 +15,15 @@ const linter: LinterAdapter = {
       output: `prettier:${text}`,
       warningCount: 0,
     }),
-  ),
-  lint: jest.fn<LinterAdapterLint>(() =>
+  ) as LinterAdapterFormat,
+  lint: jest.fn(({ filePath }) =>
     Promise.resolve({
+      filePath,
       errorCount: 0,
       messages: [],
       warningCount: 0,
     }),
-  ),
+  ) as LinterAdapterLint,
 };
 
 const linterFactory: LinterFactory = () => linter;

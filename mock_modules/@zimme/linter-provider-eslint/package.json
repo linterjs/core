@@ -1,0 +1,11 @@
+{
+  "name": "@zimme/linter-provider-eslint",
+  "version": "1.0.0-mock",
+  "main": "index.js",
+  "author": "Simon Fridlund <simon@fridlund.email>",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@linter/provider-eslint": "file:../../@linter/provider-eslint"
+  }
+}

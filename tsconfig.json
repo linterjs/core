@@ -8,15 +8,19 @@
     "preserveConstEnums": true,
     "removeComments": true,
     "strict": true,
-    "target": "ES2018"
+    "target": "ES2018",
+    "baseUrl": ".",
+    "paths": {
+      "@linter/core": ["src/index.ts"]
+    }
   },
   "exclude": [
     "node_modules",
+    "tests/**/*",
     "**/__mocks__",
     "**/__snapshots__",
     "**/__tests__",
     "**/*.spec.*",
     "**/*.test.*"
-  ],
-  "include": ["src/**/*"]
+  ]
 }
