@@ -1,5 +1,5 @@
-import { createFormat, FormatFunction } from "./format";
-import { LinterAdapter } from "./linter-adapter";
+import { createFormat, FormatFunction } from "../src/format";
+import { LinterAdapter } from "../src/linter-adapter";
 
 describe("Format", () => {
   const filePath = "test.js";
