@@ -19,7 +19,7 @@ describe("Create Linter", () => {
     }).toThrowErrorMatchingSnapshot();
   });
 
-  test("without any linter providers installed and a log level set", () => {
+  test("without any linter providers installed and a log level set via env", () => {
     vol.fromJSON({
       "package.json": "{}",
     });
@@ -27,6 +27,16 @@ describe("Create Linter", () => {
     expect(() => {
       process.env.LOG_LEVEL = "debug";
       const linter = new Linter();
+    }).toThrowErrorMatchingSnapshot();
+  });
+
+  test("without any linter providers installed and a log level set via constructor parameter", () => {
+    vol.fromJSON({
+      "package.json": "{}",
+    });
+
+    expect(() => {
+      const linter = new Linter({ logLevel: "debug" });
     }).toThrowErrorMatchingSnapshot();
   });
 

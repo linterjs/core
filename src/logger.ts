@@ -1,7 +1,7 @@
 import { createLogger, format, transports } from "winston";
 
 export const logger = createLogger({
-  level: process.env.LOG_LEVEL ?? "warn",
+  level: "warn",
   // defaultMeta: {
   //   prefix: "@linter/core",
   // },
