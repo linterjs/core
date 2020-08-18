@@ -1,3 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Create Linter without any linter providers installed 1`] = `"No linter providers found. Please install at least one linter provider package."`;
+
+exports[`Create Linter without any linter providers installed and a log level set 1`] = `"No linter providers found. Please install at least one linter provider package."`;

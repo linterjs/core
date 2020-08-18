@@ -1,7 +1,5 @@
-import { createLint, LintFunction } from "./lint";
-import { LinterAdapter } from "./linter-adapter";
-
-jest.mock("@linter/provider-eslint");
+import { createLint, LintFunction } from "../src/lint";
+import { LinterAdapter } from "../src/linter-adapter";
 
 describe("Lint", () => {
   const filePath = "test.js";
