@@ -2,4 +2,4 @@
 
 exports[`Create Linter without any linter providers installed 1`] = `"No linter providers found. Please install at least one linter provider package."`;
 
-exports[`Create Linter without any linter providers installed and a log level set 1`] = `"No linter providers found. Please install at least one linter provider package."`;
+exports[`Create Linter without any linter providers installed and a log level set via constructor parameter 1`] = `"No linter providers found. Please install at least one linter provider package."`;

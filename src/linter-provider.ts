@@ -58,7 +58,7 @@ export function loadLinterProvidersFromFile(): Set<LinterProvider> {
           Could not import "${linterProviderModuleName}",
           is it properly installed?
         `);
-        logger.trace(error);
+        logger.silly(error);
 
         if (!optionalDependencies[linterProviderModuleName]) {
           logger.debug(
