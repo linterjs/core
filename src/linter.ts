@@ -16,7 +16,7 @@ export default class Linter {
 
   // TODO: Support config/options
   constructor(options: LinterOptions = {}) {
-    logger.level = options.logLevel ?? process.env.LOG_LEVEL ?? "warn";
+    logger.level = options.logLevel ?? "warn";
 
     const linterAdapterPromisesBySupportedExtensions = new Map<
       string,
