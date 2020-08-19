@@ -67,7 +67,6 @@
     "@types/require-relative": "~0.8.0",
     "@zimme/linter-provider-eslint": "file:mock_modules/@zimme/linter-provider-eslint",
     "babel-jest": "~26.1.0",
-    "codecov": "~3.7.2",
     "jest": "~26.1.0",
     "linter-provider-eslint": "file:mock_modules/linter-provider-eslint",
     "linter-provider-not-a-provider": "file:mock_modules/linter-provider-not-a-provider",

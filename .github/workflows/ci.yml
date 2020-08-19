@@ -1,6 +1,19 @@
 name: CI
 
-on: [push]
+on:
+  push:
+    branches:
+      - master
+    tags:
+      - "!*" # Do not execute on tags
+    paths:
+      - src/*
+      - tests/*
+      - "*.json"
+      - yarn.lock
+  pull_request:
+    paths:
+      - "!*.MD"
 
 jobs:
   build:
@@ -30,7 +43,7 @@ jobs:
         run: yarn outdated
         continue-on-error: true
 
-      - name: Lint
+      - name: Lint code
         run: yarn lint
 
       - name: Audit dependencies
@@ -48,5 +61,13 @@ jobs:
       - name: Build
         run: yarn build
 
-      - name: Test
+      - name: Run unit tests
         run: yarn test
+        env:
+          CI: true
+
+      - name: Publish code coverage report
+        uses: paambaati/codeclimate-action@v2.2.4
+        if: matrix.os == 'ubuntu-latest' && matrix.node == '12.x'
+        with:
+          coverageCommand: yarn test
