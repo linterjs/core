@@ -7,7 +7,6 @@ import {
 } from "./errors";
 import { LinterFactory } from "./linter-adapter";
 import { logger } from "./logger";
-import requireRelative = require("require-relative");
 
 export interface LinterProvider {
   factory: LinterFactory;
