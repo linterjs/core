@@ -54,13 +54,16 @@ jobs:
       - name: Build
         run: yarn build
 
-      - name: Run unit tests
-        run: yarn test
+      # - name: Run unit tests
+      #   run: yarn test
+      #   env:
+      #     CI: true
+
+      - name: Test & publish code coverage
+        uses: paambaati/codeclimate-action@v2.6.0
+        if: matrix.os == 'ubuntu-latest' && matrix.node == '12.x'
         env:
           CI: true
-
-      - name: Publish code coverage report
-        uses: paambaati/codeclimate-action@v2.2.4
-        if: matrix.os == 'ubuntu-latest' && matrix.node == '12.x'
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         with:
           coverageCommand: yarn test
