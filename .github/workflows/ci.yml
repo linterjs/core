@@ -4,16 +4,9 @@ on:
   push:
     branches:
       - master
-    tags:
-      - "!*" # Do not execute on tags
-    paths:
-      - src/*
-      - tests/*
-      - "*.json"
-      - yarn.lock
   pull_request:
-    paths:
-      - "!*.MD"
+    branches:
+      - "**"
 
 jobs:
   build:
