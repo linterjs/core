@@ -5,7 +5,7 @@ import { loadLinterProvidersFromFile } from "./linter-provider";
 import { logger } from "./logger";
 
 export interface LinterOptions {
-  logLevel?: "error" | "warn" | "info" | "debug";
+  logLevel?: "error" | "warn" | "info" | "verbose" | "debug" | "silly";
 }
 
 // Create a new instance of Linter to load/reload registered
