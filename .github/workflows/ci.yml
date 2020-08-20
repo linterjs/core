@@ -1,6 +1,12 @@
 name: CI
 
-on: [push]
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - "**"
 
 jobs:
   build:
@@ -26,11 +32,11 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
-      - name: Check outdated dependencies
-        run: yarn outdated
-        continue-on-error: true
+      # - name: Check outdated dependencies
+      #   run: yarn outdated
+      #   continue-on-error: true
 
-      - name: Lint
+      - name: Lint code
         run: yarn lint
 
       - name: Audit dependencies
@@ -48,5 +54,22 @@ jobs:
       - name: Build
         run: yarn build
 
-      - name: Test
+      # - name: Run unit tests
+      #   run: yarn test
+      #   env:
+      #     CI: true
+
+      - name: Test code
         run: yarn test
+        if: matrix.os != 'ubuntu-latest' || matrix.node != '12.x'
+        env:
+          CI: true
+
+      - name: Test & publish code coverage
+        uses: paambaati/codeclimate-action@v2.6.0
+        if: matrix.os == 'ubuntu-latest' && matrix.node == '12.x'
+        env:
+          CI: true
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+        with:
+          coverageCommand: yarn test
