@@ -59,6 +59,12 @@ jobs:
       #   env:
       #     CI: true
 
+      - name: Test code
+        run: yarn test
+        if: matrix.os != 'ubuntu-latest' || matrix.node != '12.x'
+        env:
+          CI: true
+
       - name: Test & publish code coverage
         uses: paambaati/codeclimate-action@v2.6.0
         if: matrix.os == 'ubuntu-latest' && matrix.node == '12.x'
