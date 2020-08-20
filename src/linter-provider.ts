@@ -7,7 +7,6 @@ import {
 } from "./errors";
 import { LinterFactory } from "./linter-adapter";
 import { logger } from "./logger";
-import requireRelative = require("require-relative");
 
 export interface LinterProvider {
   factory: LinterFactory;
@@ -59,7 +58,7 @@ export function loadLinterProvidersFromFile(): Set<LinterProvider> {
           Could not import "${linterProviderModuleName}",
           is it properly installed?
         `);
-        logger.trace(error);
+        logger.silly(error);
 
         if (!optionalDependencies[linterProviderModuleName]) {
           logger.debug(

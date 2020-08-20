@@ -2,7 +2,11 @@ import { createFormat, FormatFunction } from "./format";
 import { createLint, LintFunction } from "./lint";
 import { LinterAdapter } from "./linter-adapter";
 import { loadLinterProvidersFromFile } from "./linter-provider";
-import { getDefaultLogLevel, logger } from "./logger";
+import { logger } from "./logger";
+
+export interface LinterOptions {
+  logLevel?: "error" | "warn" | "info" | "verbose" | "debug" | "silly";
+}
 
 // Create a new instance of Linter to load/reload registered
 // linter providers from file
@@ -11,8 +15,8 @@ export default class Linter {
   lint: LintFunction;
 
   // TODO: Support config/options
-  constructor() {
-    logger.setLevel(getDefaultLogLevel());
+  constructor(options: LinterOptions = {}) {
+    logger.level = options.logLevel ?? "warn";
 
     const linterAdapterPromisesBySupportedExtensions = new Map<
       string,
