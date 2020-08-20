@@ -32,9 +32,9 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
-      - name: Check outdated dependencies
-        run: yarn outdated
-        continue-on-error: true
+      # - name: Check outdated dependencies
+      #   run: yarn outdated
+      #   continue-on-error: true
 
       - name: Lint code
         run: yarn lint
