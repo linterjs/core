@@ -8,6 +8,5 @@
 [![code style: Prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://prettier.io)
 [![license: MIT](https://img.shields.io/github/license/linterjs/core.svg?style=flat-square)](https://github.com/linterjs/core/blob/master/LICENSE.md)
 [![Discord chat](https://img.shields.io/badge/chat-on%20discord-7289da.svg)](https://discord.gg/cNUqYNq)
-[![Spectrum chat](https://raw.githubusercontent.com/withspectrum/badge/5da682a8369e3b03b50acea6dee23d18ee29a12f/badge_small.svg)](https://spectrum.chat/linterjs?tab=posts)
 
 This is the core component of `@linter`. This is used by the cli, editor integrations and linter providers.
